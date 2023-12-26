@@ -1,0 +1,42 @@
+<div>
+  <form [formGroup]="userDataForm">
+    <mat-form-field class="example-full-width">
+      <mat-label>Email</mat-label>
+      <input type="email"
+             matInput
+             [formControl]="userDataForm.controls.email"
+             placeholder="Ex. pat@example.com">
+
+      @if (userDataForm.controls.email.hasError('email')
+      && !userDataForm.controls.email.hasError('required')) {
+        <mat-error>Please enter a valid email address</mat-error>
+      }
+
+      @if (userDataForm.controls.email.hasError('required')) {
+        <mat-error>Email is <strong>required</strong></mat-error>
+      }
+    </mat-form-field>
+
+    <mat-form-field class="example-full-width">
+      <mat-label>Email</mat-label>
+      <input
+            type="text"
+            matInput
+            [formControl]="userDataForm.controls.password"
+             placeholder="Ex. password101">
+
+      @if (userDataForm.controls.password.hasError('required')) {
+        <mat-error>Password is <strong>required</strong></mat-error>
+      }
+    </mat-form-field>
+
+
+<button
+type="submit">
+  Submit
+</button>
+
+  </form>
+
+
+</div>
