@@ -6,6 +6,9 @@ import {HomeComponent} from "./home/home.component";
 import { AuthFormComponent} from "./auth-fom/auth-form.component";
 import {MaterialModule} from "../material/material.module";
 import {ReactiveFormsModule} from "@angular/forms";
+import {HttpClientModule} from "@angular/common/http";
+import {LoginService} from "./login.service";
+import {LoginServiceRepository} from "./LoginServiceRepository";
 
 
 
@@ -19,10 +22,15 @@ import {ReactiveFormsModule} from "@angular/forms";
   imports: [
     CommonModule,
     ReactiveFormsModule,
-    MaterialModule
+    MaterialModule,
+    HttpClientModule
   ],
   exports: [
     HomeComponent
+  ],
+  providers: [
+    LoginService,
+    LoginServiceRepository
   ]
 })
 export class AuthModule { }

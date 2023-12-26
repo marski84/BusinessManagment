@@ -1,5 +1,10 @@
-<div>
-  <form [formGroup]="userDataForm">
+<div >
+  <form
+    [formGroup]="userDataForm"
+    (ngSubmit)="handleSubmit()"
+    class="form-container"
+
+  >
     <mat-form-field class="example-full-width">
       <mat-label>Email</mat-label>
       <input type="email"
@@ -18,7 +23,7 @@
     </mat-form-field>
 
     <mat-form-field class="example-full-width">
-      <mat-label>Email</mat-label>
+      <mat-label>Password</mat-label>
       <input
             type="text"
             matInput
@@ -31,10 +36,15 @@
     </mat-form-field>
 
 
-<button
-type="submit">
-  Submit
-</button>
+    <button
+      mat-button
+      color="primary"
+      type="submit"
+      class="submit-button"
+      [disabled]="!userDataForm.valid"
+    >
+      Submit
+    </button>
 
   </form>
 

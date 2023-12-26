@@ -1,5 +1,5 @@
 import {Component, EventEmitter, inject, Output} from '@angular/core';
-import {FormBuilder, FormGroup, NonNullableFormBuilder, Validators} from "@angular/forms";
+import { FormGroup, NonNullableFormBuilder, Validators} from "@angular/forms";
 import {UserDataFormInterface} from "./UserDataForm.interface";
 
 @Component({
@@ -12,7 +12,7 @@ export class AuthFormComponent {
   fb = inject(NonNullableFormBuilder);
 
   userDataForm: FormGroup<UserDataFormInterface> = this.fb.group({
-    email:['', Validators.required, Validators.email],
+    email:['',[ Validators.required, Validators.email]],
     password: ['', Validators.required]
   })
 
@@ -20,6 +20,7 @@ export class AuthFormComponent {
     if (!this.userDataForm.valid) {
       return;
     }
+    console.log(this.userDataForm.getRawValue())
     this.onSubmitEmitted.emit(this.userDataForm.getRawValue());
   }
 
