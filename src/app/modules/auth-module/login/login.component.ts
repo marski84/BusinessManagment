@@ -8,10 +8,9 @@ import {LoginService} from "../login.service";
   templateUrl: './login.component.html',
   styleUrl: './login.component.css'
 })
-export class LoginComponent implements AbstractAuthenticationComponent {
+export class LoginComponent extends AbstractAuthenticationComponent{
 
-  loginService: LoginService = inject(LoginService);
-  onFormSubmit(event: FormDataInterface) {
+  override onFormSubmit(event: FormDataInterface) {
     console.log(event);
     this.loginService.handleSignIn(event)
   }

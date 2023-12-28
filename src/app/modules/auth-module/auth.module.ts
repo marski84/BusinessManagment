@@ -6,9 +6,11 @@ import {HomeComponent} from "./home/home.component";
 import { AuthFormComponent} from "./auth-fom/auth-form.component";
 import {MaterialModule} from "../material/material.module";
 import {ReactiveFormsModule} from "@angular/forms";
-import {HttpClientModule} from "@angular/common/http";
+import { provideHttpClient, withInterceptors} from "@angular/common/http";
 import {LoginService} from "./login.service";
 import {LoginServiceRepository} from "./LoginServiceRepository";
+import {authInterceptor} from "./auth.interceptor";
+import {PanelModule} from "../panel/panel.module";
 
 
 
@@ -23,14 +25,15 @@ import {LoginServiceRepository} from "./LoginServiceRepository";
     CommonModule,
     ReactiveFormsModule,
     MaterialModule,
-    HttpClientModule
+    PanelModule
   ],
   exports: [
     HomeComponent
   ],
   providers: [
     LoginService,
-    LoginServiceRepository
-  ]
+    LoginServiceRepository,
+    provideHttpClient(withInterceptors([authInterceptor]))
+]
 })
 export class AuthModule { }
