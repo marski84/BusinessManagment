@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import {AbstractAuthenticationComponent} from "../AbstractAuthenticationComponent";
-import {FormDataInterface} from "../auth-fom/FormData.interface";
+import {FormDataInterface} from "../models/FormData.interface";
 
 @Component({
   selector: 'app-register',

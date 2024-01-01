@@ -11,6 +11,7 @@ import {LoginService} from "./login.service";
 import {LoginServiceRepository} from "./LoginServiceRepository";
 import {authInterceptor} from "./auth.interceptor";
 import {PanelModule} from "../panel/panel.module";
+import {SpinnerModule} from "../spinner/spinner.module";
 
 
 
@@ -25,6 +26,8 @@ import {PanelModule} from "../panel/panel.module";
     CommonModule,
     ReactiveFormsModule,
     MaterialModule,
+    SpinnerModule,
+    // temp
     PanelModule
   ],
   exports: [

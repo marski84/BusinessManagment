@@ -1,1 +1,4 @@
-<app-auth-form (onSubmitEmitted)="onFormSubmit($event)"></app-auth-form>
+<app-auth-form #form (onSubmitEmitted)="onFormSubmit($event)"></app-auth-form>
+<button (click)="setLoginData()">Set login data</button>
+
+<button (click)="loginService.urlRepository.getUserData()">get user data</button>

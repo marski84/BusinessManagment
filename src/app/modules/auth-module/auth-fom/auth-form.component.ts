@@ -1,6 +1,6 @@
 import {Component, EventEmitter, inject, Output} from '@angular/core';
 import { FormGroup, NonNullableFormBuilder, Validators} from "@angular/forms";
-import {UserDataFormInterface} from "./UserDataForm.interface";
+import {UserDataFormInterface} from "../models/UserDataForm.interface";
 
 @Component({
   selector: 'app-auth-form',

@@ -1,4 +1,4 @@
-import {FormDataInterface} from "./auth-fom/FormData.interface";
+import {FormDataInterface} from "./models/FormData.interface";
 import {LoginService} from "./login.service";
 import {inject} from "@angular/core";
 

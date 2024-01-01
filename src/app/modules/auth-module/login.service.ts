@@ -1,9 +1,10 @@
 import {DestroyRef, inject, Injectable} from '@angular/core';
 import {LoginServiceRepository} from "./LoginServiceRepository";
-import {FormDataInterface} from "./auth-fom/FormData.interface";
+import {FormDataInterface} from "./models/FormData.interface";
 import {takeUntilDestroyed} from "@angular/core/rxjs-interop";
 import {tap} from "rxjs";
 import {Router} from "@angular/router";
+import {ApiResponseInterface} from "./models/ApiResponse.interface";
 
 @Injectable()
 export class LoginService {
@@ -17,8 +18,8 @@ export class LoginService {
   handleSignIn(userData: FormDataInterface) {
   this.urlRepository.signIn(userData)
     .pipe(
+      tap(response => this.handleResponse(response)),
       takeUntilDestroyed(this.destroyRef$),
-      tap(response => this.handleResponse(response))
     )
     .subscribe()
   }
@@ -34,11 +35,12 @@ export class LoginService {
 
 
   // handle sign up and store the token in service, then navigate to authorized part of the app
-  private handleResponse(response: any) {
+  private handleResponse(response: ApiResponseInterface) {
     console.log(response)
 
-    this.jwtToken = response;
-    this.router.navigate(['/home'])
+    this.jwtToken = response.accessToken;
+    // this.router.navigate(['/home'])
+    console.log(this.jwtToken)
 
 
   }
