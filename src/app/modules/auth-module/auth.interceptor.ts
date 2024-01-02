@@ -22,16 +22,19 @@ export const authInterceptor: HttpInterceptorFn = (req, next) => {
       tap(() => {
         spinnerService.show()
       }),
+      catchError((err: HttpErrorResponse) => {
+        spinnerService.hide()
+        return throwError(err);
+      }),
       retry(2),
       catchError((err: HttpErrorResponse) => {
-      if (err.status !== 200) {
+        if (err.status !== 200) {
         alert('Http error occured')
       }
       return throwError(err);
     }),
       finalize(() => {
-        console.log('ok')
-        spinnerService.hide()
+            spinnerService.hide()
       })
   );
 };

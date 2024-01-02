@@ -17,10 +17,20 @@ export class SpinnerService {
 
   hide() {
     this.isLoading$.next(false)
-
     this.amountOfCalls--;
-    if (this.amountOfCalls === 0) {
-    }
+
+        // if (this.amountOfCalls < 0) {
+        //   this.amountOfCalls = 0;
+        //   this.isLoading$.next(false)
+        //
+        // }
+        // console.log(this.amountOfCalls)
+        //
+        // if (this.amountOfCalls === 0) {
+        //   this.isLoading$.next(false)
+        // }
+
+
   }
 
 }
