@@ -6,12 +6,17 @@ import {HomeComponent} from "./home/home.component";
 import { AuthFormComponent} from "./auth-fom/auth-form.component";
 import {MaterialModule} from "../material/material.module";
 import {ReactiveFormsModule} from "@angular/forms";
-import { provideHttpClient, withInterceptors} from "@angular/common/http";
+import {
+  HttpClientModule,
+  provideHttpClient,
+  withInterceptors
+} from "@angular/common/http";
 import {LoginService} from "./login.service";
 import {LoginServiceRepository} from "./LoginServiceRepository";
 import {authInterceptor} from "./auth.interceptor";
 import {PanelModule} from "../panel/panel.module";
 import {SpinnerModule} from "../spinner/spinner.module";
+import {RouterModule} from "@angular/router";
 
 
 
@@ -24,9 +29,11 @@ import {SpinnerModule} from "../spinner/spinner.module";
   ],
   imports: [
     CommonModule,
+    RouterModule,
     ReactiveFormsModule,
     MaterialModule,
     SpinnerModule,
+    HttpClientModule,
     // temp
     PanelModule
   ],
@@ -34,9 +41,9 @@ import {SpinnerModule} from "../spinner/spinner.module";
     HomeComponent
   ],
   providers: [
-    LoginService,
     LoginServiceRepository,
+    LoginService,
     provideHttpClient(withInterceptors([authInterceptor]))
-]
+  ]
 })
 export class AuthModule { }

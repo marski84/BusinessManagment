@@ -6,14 +6,16 @@ import {tap} from "rxjs";
 import {Router} from "@angular/router";
 import {ApiResponseInterface} from "./models/ApiResponse.interface";
 
-@Injectable()
+@Injectable(
+  {providedIn: 'root'}
+)
 export class LoginService {
   destroyRef$ = inject(DestroyRef);
   urlRepository: LoginServiceRepository = inject(LoginServiceRepository);
   router = inject(Router);
   jwtToken = '';
 
-  constructor() { }
+  // constructor(public urlRepository: LoginServiceRepository) { }
 
   handleSignIn(userData: FormDataInterface) {
   this.urlRepository.signIn(userData)
@@ -33,13 +35,17 @@ export class LoginService {
       .subscribe()
   }
 
+  handleGetUserData() {
+   return this.urlRepository.getUserData()
+  }
+
 
   // handle sign up and store the token in service, then navigate to authorized part of the app
   private handleResponse(response: ApiResponseInterface) {
     console.log(response)
 
     this.jwtToken = response.accessToken;
-    // this.router.navigate(['/home'])
+    this.router.navigate(['panel'])
     console.log(this.jwtToken)
 
 

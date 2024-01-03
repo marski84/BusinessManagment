@@ -10,6 +10,7 @@ export const authInterceptor: HttpInterceptorFn = (req, next) => {
   const spinnerService = inject(SpinnerService);
 
   if (loginService.jwtToken) {
+    console.log('interceptor')
     req = req.clone({
       setHeaders: {
         Authorization: `Bearer ${loginService.jwtToken}`
