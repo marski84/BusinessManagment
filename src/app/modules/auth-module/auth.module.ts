@@ -33,7 +33,7 @@ import {RouterModule} from "@angular/router";
     ReactiveFormsModule,
     MaterialModule,
     SpinnerModule,
-    HttpClientModule,
+    // HttpClientModule,
     // temp
     PanelModule
   ],

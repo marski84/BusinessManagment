@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import {Component, Input} from '@angular/core';
+import {UserDataInterface} from "../../../Shared/UserData.interface";
 
 @Component({
   selector: 'app-user-info',
@@ -6,5 +7,7 @@ import { Component } from '@angular/core';
   styleUrl: './user-info.component.css'
 })
 export class UserInfoComponent {
+  @Input()
+  userData!: UserDataInterface
 
 }

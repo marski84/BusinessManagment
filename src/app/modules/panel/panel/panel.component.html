@@ -1,1 +1,8 @@
-<p>panel works!</p>
+<ng-container *ngIf="userData | async as userData">
+  <div>
+    {{userData | json}}
+  </div>
+
+  <app-panel-header [userData]=userData></app-panel-header>
+
+</ng-container>

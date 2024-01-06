@@ -5,13 +5,14 @@ import {takeUntilDestroyed} from "@angular/core/rxjs-interop";
 import {tap} from "rxjs";
 import {Router} from "@angular/router";
 import {ApiResponseInterface} from "./models/ApiResponse.interface";
+import {StoreService} from "../../store.service";
 
 @Injectable(
-  {providedIn: 'root'}
 )
 export class LoginService {
   destroyRef$ = inject(DestroyRef);
   urlRepository: LoginServiceRepository = inject(LoginServiceRepository);
+  storeService: StoreService = inject(StoreService);
   router = inject(Router);
   jwtToken = '';
 
@@ -45,6 +46,7 @@ export class LoginService {
     console.log(response)
 
     this.jwtToken = response.accessToken;
+    this.storeService.jwtToken = this.jwtToken;
     this.router.navigate(['panel'])
     console.log(this.jwtToken)
 

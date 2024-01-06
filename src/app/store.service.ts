@@ -1,6 +1,7 @@
 import {computed, inject, Injectable, signal} from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 import {takeUntilDestroyed} from "@angular/core/rxjs-interop";
+import {LoginService} from "./modules/auth-module/login.service";
 
 
 interface ChecklistState {
@@ -12,6 +13,7 @@ interface ChecklistState {
 })
 export class StoreService {
    http = inject(HttpClient);
+   jwtToken = '';
 
   // state
   state = signal<ChecklistState>(
@@ -34,4 +36,5 @@ export class StoreService {
           ({ ...state, checklist, loaded: true }))
       );
   }
+
 }

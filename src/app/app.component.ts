@@ -11,9 +11,7 @@ import {LoginServiceRepository} from "./modules/auth-module/LoginServiceReposito
   selector: 'app-root',
   standalone: true,
   imports: [HttpClientModule, CommonModule, RouterOutlet, AuthModule, PanelModule],
-  providers: [
-
-  ],
+  providers: [LoginService, LoginServiceRepository],
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
