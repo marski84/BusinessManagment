@@ -12,6 +12,7 @@ export const authInterceptor: HttpInterceptorFn = (req, next) => {
 
   if (storeService.jwtToken) {
     console.log('interceptor')
+    console.log(storeService.jwtToken)
     req = req.clone({
       setHeaders: {
         Authorization: `Bearer ${storeService.jwtToken}`

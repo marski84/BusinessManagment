@@ -46,7 +46,7 @@ export class LoginService {
     console.log(response)
 
     this.jwtToken = response.accessToken;
-    this.storeService.jwtToken = this.jwtToken;
+    this.storeService.jwtToken = response.accessToken;
     this.router.navigate(['panel'])
     console.log(this.jwtToken)
 

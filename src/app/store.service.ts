@@ -1,7 +1,6 @@
 import {computed, DestroyRef, inject, Injectable, signal} from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 import {takeUntilDestroyed} from "@angular/core/rxjs-interop";
-import {LoginService} from "./modules/auth-module/login.service";
 import {UserDataInterface} from "./Shared/UserData.interface";
 import {retry, tap} from "rxjs";
 import {Router} from "@angular/router";
@@ -21,7 +20,7 @@ export class StoreService {
    jwtToken = '';
    userData: UserDataInterface | null = null;
    private readonly userDataUrl: string ='https://lobster-app-86syw.ondigitalocean.app/auth/user';
-   temp = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1OGRjYzYwNDEwMDlmN2YzOGJiMmE0YyIsImlhdCI6MTcwNDU1NjIyOCwiZXhwIjoxNzA0NjQyNjI4fQ.wiS7aFmyOGASsWFn1x2gzKNhx9NhwFksfjiOukTpOeA\n'
+   temp = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1OGRjYzYwNDEwMDlmN2YzOGJiMmE0YyIsImlhdCI6MTcwNDU1NjIyOCwiZXhwIjoxNzA0NjQyNjI4fQ.wiS7aFmyOGASsWFn1x2gzKNhx9NhwFksfjiOukTpOeA'
 
 
   // state
@@ -50,7 +49,7 @@ export class StoreService {
     return this.http.get<UserDataInterface>(this.userDataUrl,
       {
         headers: {
-          Authorization: `Bearer ${this.temp}`
+          Authorization: `Bearer ${this.jwtToken}`
         }
       })
       .pipe(
