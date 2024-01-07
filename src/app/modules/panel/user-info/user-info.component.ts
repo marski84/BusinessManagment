@@ -1,4 +1,4 @@
-import {Component, Input} from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import {UserDataInterface} from "../../../Shared/UserData.interface";
 
 @Component({
@@ -6,8 +6,11 @@ import {UserDataInterface} from "../../../Shared/UserData.interface";
   templateUrl: './user-info.component.html',
   styleUrl: './user-info.component.css'
 })
-export class UserInfoComponent {
-  @Input()
-  userData!: UserDataInterface
+export class UserInfoComponent implements OnInit {
+  @Input() userData!: UserDataInterface
+
+  ngOnInit(): void {
+
+  }
 
 }

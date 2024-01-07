@@ -1,6 +1,18 @@
-<div class="header-container">
+<mat-toolbar>
+  <div>
+      <app-user-info [userData]="userData"></app-user-info>
+  </div>
+  <span class="example-spacer"></span>
 
-  <app-user-info [userData]="userData"></app-user-info>
-  <app-logout></app-logout>
+  <div>
+      <app-logout></app-logout>
+  </div>
+</mat-toolbar>
 
-</div>
+
+
+<!--<div class="header-container">-->
+<!--  <app-user-info [userData]="userData"></app-user-info>-->
+
+
+<!--</div>-->

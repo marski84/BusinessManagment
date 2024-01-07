@@ -1,5 +1,17 @@
-.header-container{
+.header-container {
   width: 100%;
   min-height: 15%;
   background-color:gray;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+mat-toolbar {
+  min-height: 20%
+}
+
+
+.example-spacer {
+  flex: 1 1 auto;
 }

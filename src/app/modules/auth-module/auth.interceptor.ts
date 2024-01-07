@@ -3,17 +3,18 @@ import {inject} from "@angular/core";
 import {LoginService} from "./login.service";
 import {catchError, finalize, retry, tap, throwError} from "rxjs";
 import {SpinnerService} from "../spinner/spinner.service";
+import {StoreService} from "../../store.service";
 
 export const authInterceptor: HttpInterceptorFn = (req, next) => {
 
-  const loginService = inject(LoginService);
+  const storeService = inject(StoreService);
   const spinnerService = inject(SpinnerService);
 
-  if (loginService.jwtToken) {
+  if (storeService.jwtToken) {
     console.log('interceptor')
     req = req.clone({
       setHeaders: {
-        Authorization: `Bearer ${loginService.jwtToken}`
+        Authorization: `Bearer ${storeService.jwtToken}`
       }
     })
   }

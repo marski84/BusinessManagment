@@ -1,8 +1,3 @@
-<ng-container *ngIf="userData | async as userData">
-  <div>
-    {{userData | json}}
-  </div>
-
-  <app-panel-header [userData]=userData></app-panel-header>
-
+<ng-container *ngIf="userData | async as userInfo">
+  <app-panel-header [userData]="userInfo['userData']"></app-panel-header>
 </ng-container>

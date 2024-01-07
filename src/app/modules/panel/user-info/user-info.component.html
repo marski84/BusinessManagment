@@ -1,1 +1,9 @@
-<p>{{userData | json}}</p>
+
+<div *ngIf="userData" class="user-data-container">
+  <div>
+    User id: {{ userData._id }}
+  </div>
+  <div>
+    User email: {{userData.email}}
+  </div>
+</div>

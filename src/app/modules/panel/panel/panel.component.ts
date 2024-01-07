@@ -1,6 +1,7 @@
 import {Component, inject, OnInit} from '@angular/core';
-import {ActivatedRoute} from "@angular/router";
+import {ActivatedRoute, Data} from "@angular/router";
 import {Observable, Subscription} from "rxjs";
+import {UserDataInterface} from "../../../Shared/UserData.interface";
 
 @Component({
   selector: 'app-panel',
@@ -9,7 +10,7 @@ import {Observable, Subscription} from "rxjs";
 })
 export class PanelComponent implements OnInit {
   activatedRoute = inject(ActivatedRoute)
-  userData: Observable<{}> =  this.activatedRoute.data
+  userData: Observable<Data> = this.activatedRoute.data;
 
   ngOnInit(): void {
   }

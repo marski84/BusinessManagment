@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import {Component, inject} from '@angular/core';
+import {StoreService} from "../../../store.service";
 
 @Component({
   selector: 'app-logout',
@@ -6,5 +7,10 @@ import { Component } from '@angular/core';
   styleUrl: './logout.component.css'
 })
 export class LogoutComponent {
+  private readonly storeService = inject(StoreService);
+
+  handleLogout() {
+    this.storeService.logOutUser();
+  }
 
 }
