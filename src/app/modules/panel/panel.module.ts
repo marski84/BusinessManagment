@@ -5,6 +5,7 @@ import {PanelHeaderComponent} from "./panel-header/panel-header.component";
 import {UserInfoComponent} from "./user-info/user-info.component";
 import {LogoutComponent} from "./logout/logout.component";
 import {PanelComponent} from "./panel/panel.component";
+import {CompanyModule} from "../company/company.module";
 
 
 
@@ -18,6 +19,7 @@ import {PanelComponent} from "./panel/panel.component";
   imports: [
     CommonModule,
     MaterialModule,
+    CompanyModule
   ],
   exports: [
     PanelHeaderComponent,

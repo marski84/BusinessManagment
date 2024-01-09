@@ -51,7 +51,8 @@ export class StoreService {
         headers: {
           Authorization: `Bearer ${this.jwtToken}`
         }
-      })
+      }
+      )
       .pipe(
         retry(3),
         tap((data) => this.userData = data),

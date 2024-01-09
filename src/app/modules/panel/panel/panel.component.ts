@@ -14,6 +14,8 @@ export class PanelComponent implements OnInit {
   activatedRoute = inject(ActivatedRoute)
   userData: Observable<Data> = this.activatedRoute.data;
   data = toSignal(this.userData);
+
+
   ngOnInit(): void {
   }
 

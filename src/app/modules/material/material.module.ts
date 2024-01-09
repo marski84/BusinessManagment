@@ -4,13 +4,16 @@ import {MatTabsModule} from '@angular/material/tabs';
 import {MatInputModule} from '@angular/material/input';
 import {MatButtonModule} from "@angular/material/button";
 import {MatToolbarModule} from '@angular/material/toolbar';
+import {MatSidenavModule} from '@angular/material/sidenav';
+
 
 
 const modules = [
   MatInputModule,
   MatTabsModule,
   MatButtonModule,
-  MatToolbarModule
+  MatToolbarModule,
+  MatSidenavModule
 ]
 
 @NgModule({

@@ -1,6 +1,5 @@
 import {HttpErrorResponse, HttpInterceptorFn} from '@angular/common/http';
 import {inject} from "@angular/core";
-import {LoginService} from "./login.service";
 import {catchError, finalize, retry, tap, throwError} from "rxjs";
 import {SpinnerService} from "../spinner/spinner.service";
 import {StoreService} from "../../store.service";
@@ -13,6 +12,7 @@ export const authInterceptor: HttpInterceptorFn = (req, next) => {
   if (storeService.jwtToken) {
     console.log('interceptor')
     console.log(storeService.jwtToken)
+    console.log(storeService.temp)
     req = req.clone({
       setHeaders: {
         Authorization: `Bearer ${storeService.jwtToken}`

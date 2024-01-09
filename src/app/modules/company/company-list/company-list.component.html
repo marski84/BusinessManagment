@@ -1,0 +1,6 @@
+<p>company-list works!</p>
+<!-- {{companyData() | json }} -->
+<ng-container *ngIf="companyData | async as data">
+  {{data | json}}
+
+</ng-container>

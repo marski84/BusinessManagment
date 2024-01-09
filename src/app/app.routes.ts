@@ -13,6 +13,6 @@ export const routes: Routes = [
     path:'panel',
     component: PanelComponent,
     resolve: {userData: userDataResolver},
-    canActivate: [isLoggedGuard],
+    // canActivate: [isLoggedGuard],
   }
 ];
