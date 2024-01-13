@@ -1,6 +1,14 @@
 <p>company-list works!</p>
-<!-- {{companyData() | json }} -->
-<ng-container *ngIf="companyData | async as data">
-  {{data | json}}
+<div>
+  <app-spinner></app-spinner>
 
-</ng-container>
+
+  <ng-container *ngIf="companyListObs$ | async as companyList">
+    {{companyList | json}}
+    <div *ngFor="let companyData of companyList.data">
+      <app-company-detail [companyData]="companyData"></app-company-detail>
+
+    </div>
+  </ng-container>
+</div>
+

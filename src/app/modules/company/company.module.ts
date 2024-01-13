@@ -5,6 +5,8 @@ import {CompanyListComponent} from "./company-list/company-list.component";
 import {CompanyDetailComponent} from "./company-detail/company-detail.component";
 import {CompanyService} from "./company.service";
 import {HttpClientModule} from "@angular/common/http";
+import {SpinnerComponent} from "../spinner/spinner/spinner.component";
+import {SpinnerModule} from "../spinner/spinner.module";
 
 
 
@@ -13,7 +15,8 @@ import {HttpClientModule} from "@angular/common/http";
   imports: [
     CommonModule,
     HttpClientModule,
-    MaterialModule
+    MaterialModule,
+    SpinnerModule
   ],
   exports: [
     CompanyListComponent

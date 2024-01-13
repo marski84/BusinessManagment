@@ -1,9 +1,10 @@
 import {computed, DestroyRef, inject, Injectable, signal} from '@angular/core';
-import {HttpClient} from "@angular/common/http";
+import {HttpClient, HttpErrorResponse} from "@angular/common/http";
 import {takeUntilDestroyed} from "@angular/core/rxjs-interop";
 import {UserDataInterface} from "./Shared/UserData.interface";
-import {retry, tap} from "rxjs";
+import {catchError, EMPTY, finalize, retry, tap} from "rxjs";
 import {Router} from "@angular/router";
+import {SpinnerService} from "./modules/spinner/spinner.service";
 
 
 interface ChecklistState {
@@ -17,6 +18,7 @@ export class StoreService {
    private readonly http = inject(HttpClient);
    private readonly destroyRef$ =inject(DestroyRef);
    private readonly router = inject(Router);
+   private readonly spinnerService = inject(SpinnerService);
    jwtToken = '';
    userData: UserDataInterface | null = null;
    private readonly userDataUrl: string ='https://lobster-app-86syw.ondigitalocean.app/auth/user';
@@ -54,10 +56,18 @@ export class StoreService {
       }
       )
       .pipe(
+        takeUntilDestroyed(this.destroyRef$),
+        tap(() => this.spinnerService.show()),
         retry(3),
+        catchError(
+          (err: HttpErrorResponse) => {
+            this.spinnerService.hide();
+            return EMPTY;
+          }
+        ),
         tap((data) => this.userData = data),
         tap(() => console.log(this.userData)),
-        takeUntilDestroyed(this.destroyRef$)
+        finalize(() => this.spinnerService.hide())
       )
   }
 

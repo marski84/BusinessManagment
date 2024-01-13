@@ -1,4 +1,6 @@
-import { Component } from '@angular/core';
+import {Component, Input} from '@angular/core';
+import {CompanyDataInterface} from "../models/Company.interface";
+
 
 @Component({
   selector: 'app-company-detail',
@@ -6,5 +8,9 @@ import { Component } from '@angular/core';
   styleUrl: './company-detail.component.css'
 })
 export class CompanyDetailComponent {
+  @Input()
+  companyData!: CompanyDataInterface;
+
+
 
 }

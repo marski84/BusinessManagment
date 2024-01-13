@@ -1,6 +1,7 @@
 import {Component, inject} from '@angular/core';
 import {MatProgressSpinnerModule} from "@angular/material/progress-spinner";
 import {SpinnerService} from "../spinner.service";
+import {toSignal} from "@angular/core/rxjs-interop";
 
 @Component({
   selector: 'app-spinner',
@@ -8,7 +9,8 @@ import {SpinnerService} from "../spinner.service";
   styleUrl: './spinner.component.css'
 })
 export class SpinnerComponent {
-  spinnerService= inject(SpinnerService);
+  isSpinnerActive$= inject(SpinnerService).isLoading$;
+
 
 
 }

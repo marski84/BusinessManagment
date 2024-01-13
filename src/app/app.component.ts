@@ -6,11 +6,13 @@ import {AuthModule} from "./modules/auth-module/auth.module";
 import {PanelModule} from "./modules/panel/panel.module";
 import {LoginService} from "./modules/auth-module/login.service";
 import {LoginServiceRepository} from "./modules/auth-module/LoginServiceRepository";
+import {SpinnerService} from "./modules/spinner/spinner.service";
+import {SpinnerModule} from "./modules/spinner/spinner.module";
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [HttpClientModule, CommonModule, RouterOutlet, AuthModule, PanelModule],
+  imports: [HttpClientModule, CommonModule, RouterOutlet, AuthModule, PanelModule, SpinnerModule],
   providers: [LoginService, LoginServiceRepository],
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
