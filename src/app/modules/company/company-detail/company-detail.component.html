@@ -1,1 +1,13 @@
 {{companyData | json}}
+
+<div class="data-container">
+  <div>
+    {{companyData.name}}
+    <button
+      (click)="getCompanyEmployees(companyData._id)"
+      mat-button
+    >Company employees
+    </button>
+  </div>
+
+</div>
