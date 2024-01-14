@@ -43,6 +43,7 @@ export class AppComponent implements OnInit {
   }
 
 
+
   private handleEvent(event: RouterEvent) {
     if (event instanceof NavigationStart || event instanceof ResolveStart) {
       this.spinnerService.show();
