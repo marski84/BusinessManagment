@@ -12,7 +12,7 @@ import {FormGroup} from "@angular/forms";
 })
 export class LoginComponent extends AbstractAuthenticationComponent{
 
-  @ViewChild('form', {static: true}) authForm: AuthFormComponent | undefined
+  @ViewChild('form', {static: true}) readonly authForm: AuthFormComponent | undefined
 
   override onFormSubmit(event: FormDataInterface) {
     console.log(event);

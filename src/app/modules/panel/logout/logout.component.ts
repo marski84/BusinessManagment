@@ -9,6 +9,10 @@ import {StoreService} from "../../../store.service";
 export class LogoutComponent {
   private readonly storeService = inject(StoreService);
 
+
+  // można zrobić za pomocą dyrektywy
+  //<button logoutDirective>
+  // logoutDirective =>servis + HostListener
   handleLogout() {
     this.storeService.logOutUser();
   }

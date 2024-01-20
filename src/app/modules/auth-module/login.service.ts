@@ -45,6 +45,7 @@ export class LoginService {
   private handleResponse(response: ApiResponseInterface) {
     console.log(response)
 
+    // TODO: dwa źródła prawdy => jedno trzeba wywalić
     this.jwtToken = response.accessToken;
     this.storeService.jwtToken = response.accessToken;
     this.router.navigate(['panel'])

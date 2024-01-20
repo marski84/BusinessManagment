@@ -1,21 +1,15 @@
-import {CanActivateFn, Router} from '@angular/router';
+import {CanActivateFn, Router, UrlTree} from '@angular/router';
 import {inject} from "@angular/core";
 import {StoreService} from "../../store.service";
+import {of} from "rxjs";
 
+//
 export const isLoggedGuard: CanActivateFn = () => {
   const storeService = inject(StoreService);
   const router = inject(Router)
 
   console.log('canActivate guard')
   if (storeService.jwtToken) {
-    return true
+    return of(true)
   }
-  router.navigate(['../']).then(
-    (result) => {
-      if (!result) {
-        console.log('nawigacja')
-      }
-    }
-  )
-  return false;
-};
+  return of(router.parseUrl('../')); };

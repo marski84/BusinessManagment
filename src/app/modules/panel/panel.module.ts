@@ -6,7 +6,9 @@ import {UserInfoComponent} from "./user-info/user-info.component";
 import {LogoutComponent} from "./logout/logout.component";
 import {PanelComponent} from "./panel/panel.component";
 import {CompanyModule} from "../company/company.module";
-
+import {WorkerModule} from "../worker/worker.module";
+import {RouterModule, RouterOutlet, Routes} from "@angular/router";
+import {PanelRoutingModule} from "./panel-routing.module";
 
 
 @NgModule({
@@ -19,7 +21,10 @@ import {CompanyModule} from "../company/company.module";
   imports: [
     CommonModule,
     MaterialModule,
-    CompanyModule
+    CompanyModule,
+    WorkerModule,
+    RouterOutlet,
+    PanelRoutingModule
   ],
   exports: [
     PanelHeaderComponent,

@@ -12,6 +12,7 @@ export class LoginServiceRepository {
 
 
 
+  // TODO: domena do env
   private readonly signInUrl: string = 'https://lobster-app-86syw.ondigitalocean.app/auth/signIn';
   private readonly singUpUrl: string = 'https://lobster-app-86syw.ondigitalocean.app/auth/signUp';
   private readonly userDataUrl: string ='https://lobster-app-86syw.ondigitalocean.app/auth/user';

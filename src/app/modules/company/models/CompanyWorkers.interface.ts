@@ -5,6 +5,7 @@ export interface WorkerData {
   companyId: string
 }
 
+// CompanyWorkersReponseInterface .map(res => res.data)
 export interface CompanyWorkersInterface {
   message: string
   data: WorkerData[]

@@ -9,5 +9,8 @@ export class AbstractAuthenticationComponent {
   onFormSubmit(event: FormDataInterface) {
   }
 
+  // abstract onFormSubmit(event: FormDataInterface) {
+  // }
+
 
 }

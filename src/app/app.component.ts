@@ -5,39 +5,37 @@ import {
   NavigationEnd,
   NavigationError,
   NavigationStart, ResolveEnd, ResolveStart,
-  Router, RouterEvent,
-  RouterModule,
+  Router,
+  RouterEvent,
   RouterOutlet
 } from '@angular/router';
 import {HttpClientModule} from "@angular/common/http";
 import {AuthModule} from "./modules/auth-module/auth.module";
-import {PanelModule} from "./modules/panel/panel.module";
-import {LoginService} from "./modules/auth-module/login.service";
-import {LoginServiceRepository} from "./modules/auth-module/LoginServiceRepository";
 import {SpinnerService} from "./modules/spinner/spinner.service";
 import {SpinnerModule} from "./modules/spinner/spinner.module";
 import {tap} from "rxjs";
 import {takeUntilDestroyed} from "@angular/core/rxjs-interop";
+import {MaterialModule} from "./modules/material/material.module";
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [HttpClientModule, CommonModule, RouterOutlet, AuthModule, PanelModule, SpinnerModule],
-  providers: [LoginService, LoginServiceRepository],
+  imports: [HttpClientModule, CommonModule, RouterOutlet, AuthModule, SpinnerModule, MaterialModule],
+  providers: [],
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
 export class AppComponent implements OnInit {
-  router = inject(Router);
-  spinnerService = inject(SpinnerService);
-  destroyRef = inject(DestroyRef);
-  title = 'BusinessManagment';
+  readonly router = inject(Router);
+  readonly spinnerService = inject(SpinnerService);
+  readonly destroyRef = inject(DestroyRef);
+  readonly title = 'BusinessManagment';
 
   ngOnInit(): void {
     this.router.events
       .pipe(
         takeUntilDestroyed(this.destroyRef),
-        tap((event: any) => this.handleEvent(event))
+        tap((event: any) => this.handleEvent(event)),
       )
       .subscribe()
   }

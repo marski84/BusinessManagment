@@ -1,14 +1,13 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import {MaterialModule} from "../material/material.module";
-import {CompanyListComponent} from "./company-list/company-list.component";
-import {CompanyDetailComponent} from "./company-detail/company-detail.component";
-import {CompanyService} from "./company.service";
-import {HttpClientModule} from "@angular/common/http";
-import {SpinnerComponent} from "../spinner/spinner/spinner.component";
-import {SpinnerModule} from "../spinner/spinner.module";
-
-
+import { MaterialModule } from '../material/material.module';
+import { CompanyListComponent } from './company-list/company-list.component';
+import { CompanyDetailComponent } from './company-detail/company-detail.component';
+import { CompanyService } from './company.service';
+import { HttpClientModule } from '@angular/common/http';
+import { SpinnerComponent } from '../spinner/spinner/spinner.component';
+import { SpinnerModule } from '../spinner/spinner.module';
+import { WorkerModule } from '../worker/worker.module';
 
 @NgModule({
   declarations: [CompanyListComponent, CompanyDetailComponent],
@@ -16,13 +15,10 @@ import {SpinnerModule} from "../spinner/spinner.module";
     CommonModule,
     HttpClientModule,
     MaterialModule,
-    SpinnerModule
+    SpinnerModule,
+    WorkerModule, //TODO: do wywalenia
   ],
-  exports: [
-    CompanyListComponent
-  ],
-  providers: [
-    CompanyService
-  ]
+  exports: [CompanyListComponent],
+  providers: [CompanyService],
 })
-export class CompanyModule { }
+export class CompanyModule {}

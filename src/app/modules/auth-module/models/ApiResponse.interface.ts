@@ -1,4 +1,4 @@
-export interface ApiResponseInterface{
-  message: string,
-  accessToken: string
+export interface ApiResponseInterface {
+  message: string;
+  accessToken: string;
 }

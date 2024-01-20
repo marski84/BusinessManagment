@@ -7,7 +7,6 @@ import { AuthFormComponent} from "./auth-fom/auth-form.component";
 import {MaterialModule} from "../material/material.module";
 import {ReactiveFormsModule} from "@angular/forms";
 import {
-  HttpClientModule,
   provideHttpClient,
   withInterceptors
 } from "@angular/common/http";
@@ -33,9 +32,6 @@ import {RouterModule} from "@angular/router";
     ReactiveFormsModule,
     MaterialModule,
     SpinnerModule,
-    // HttpClientModule,
-    // temp
-    PanelModule
   ],
   exports: [
     HomeComponent

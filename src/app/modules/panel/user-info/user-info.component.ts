@@ -1,16 +1,14 @@
-import {Component, Input, OnInit} from '@angular/core';
-import {UserDataInterface} from "../../../Shared/UserData.interface";
+import { Component, Input, OnInit } from '@angular/core';
+import { UserDataInterface } from '../../../Shared/UserData.interface';
 
 @Component({
   selector: 'app-user-info',
   templateUrl: './user-info.component.html',
-  styleUrl: './user-info.component.css'
+  styleUrl: './user-info.component.css',
+  // on push
 })
 export class UserInfoComponent implements OnInit {
-  @Input() userData!: UserDataInterface
+  @Input() userData!: UserDataInterface;
 
-  ngOnInit(): void {
-
-  }
-
+  ngOnInit(): void {}
 }
