@@ -12,8 +12,7 @@ import {
 } from "@angular/common/http";
 import {LoginService} from "./login.service";
 import {LoginServiceRepository} from "./LoginServiceRepository";
-import {authInterceptor} from "./auth.interceptor";
-import {PanelModule} from "../panel/panel.module";
+import {authInterceptor} from "../../commons/AuthInterceptor/auth.interceptor";
 import {SpinnerModule} from "../spinner/spinner.module";
 import {RouterModule} from "@angular/router";
 

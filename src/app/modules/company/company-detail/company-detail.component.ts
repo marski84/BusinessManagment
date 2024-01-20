@@ -17,8 +17,8 @@ export class CompanyDetailComponent {
 
   getCompanyEmployees(companyId: string) {
     console.log(companyId)
-    this.companyService.getWorkersList(companyId)
-      .subscribe()
+    // this.companyService.getWorkersList(companyId)
+    //   .subscribe()
 
   }
 

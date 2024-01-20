@@ -13,7 +13,6 @@ export const routes: Routes = [
   {
     path: 'panel',
     loadChildren: () => import('./modules/panel/panel.module').then(m => m.PanelModule),
-    // component: PanelComponent,
     resolve: {userData: userDataResolver},
     canActivate: [isLoggedGuard],
   },

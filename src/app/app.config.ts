@@ -12,6 +12,5 @@ export const appConfig: ApplicationConfig = {
     provideAnimations(),
     provideHttpClient(),
     SpinnerService
-
   ]
 };

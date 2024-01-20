@@ -3,7 +3,6 @@ export interface CompanyDataInterface {
   name: string
 }
 
-export interface CompanyInterface {
-  message: string,
+export interface CompanyResponseInterface {
   data: CompanyDataInterface[]
 }
