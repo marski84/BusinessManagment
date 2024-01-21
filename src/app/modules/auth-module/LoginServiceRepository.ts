@@ -3,6 +3,7 @@ import {FormDataInterface} from "./models/FormData.interface";
 import {ApiResponseInterface} from "./models/ApiResponse.interface";
 import {Observable} from "rxjs";
 import {HttpClient} from "@angular/common/http";
+import {environment} from "../../../environments/environment";
 
 @Injectable(
   // {providedIn: 'root'}
@@ -11,13 +12,14 @@ export class LoginServiceRepository {
   // httpClient: HttpClient = inject(HttpClient);
 
 
-
+  private readonly baseUrl = environment.apiBaseUrl;
   // TODO: domena do env
-  private readonly signInUrl: string = 'https://lobster-app-86syw.ondigitalocean.app/auth/signIn';
-  private readonly singUpUrl: string = 'https://lobster-app-86syw.ondigitalocean.app/auth/signUp';
-  private readonly userDataUrl: string ='https://lobster-app-86syw.ondigitalocean.app/auth/user';
+  private readonly signInUrl: string = `${this.baseUrl}/auth/signIn`;
+  private readonly singUpUrl: string = `${this.baseUrl}/auth/signUp`;
+  private readonly userDataUrl: string =`${this.baseUrl}/auth/user`;
 
   constructor(private httpClient: HttpClient) {
+    console.log(this.baseUrl)
   }
   signIn(data: FormDataInterface): Observable<ApiResponseInterface> {
     return this.httpClient.post<ApiResponseInterface>(this.signInUrl, data)
