@@ -1,10 +1,10 @@
 import { DestroyRef, inject, Injectable } from '@angular/core';
-import { StoreService } from '../../store.service';
-import { HttpClient, HttpErrorResponse } from '@angular/common/http';
-import {catchError, EMPTY, finalize, map, Observable, of, retry, tap, throwError} from 'rxjs';
+import { HttpClient } from '@angular/common/http';
+import {map, Observable} from 'rxjs';
 import { SpinnerService } from '../spinner/spinner.service';
 import {CompanyDataInterface, CompanyResponseInterface} from './models/Company.interface';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import {environment} from "../../../environments/environment";
 
 @Injectable()
 export class CompanyService {
@@ -12,8 +12,7 @@ export class CompanyService {
   private readonly http = inject(HttpClient);
   private readonly destroyRef = inject(DestroyRef);
 
-  private readonly companyListUrl =
-    'https://lobster-app-86syw.ondigitalocean.app/companies';
+  private readonly companyListUrl =environment.apiBaseUrl;
 
   constructor() {}
 
@@ -22,14 +21,7 @@ export class CompanyService {
       .get<CompanyResponseInterface>(this.companyListUrl)
       .pipe(
         takeUntilDestroyed(this.destroyRef),
-        tap(() => this.spinnerService.show()),
         map((data) => data.data),
-        // retry(3),
-        // catchError((err: HttpErrorResponse) => {
-        //   this.spinnerService.hide()
-        //   return throwError(() => err)
-        // }),
-        finalize(() => this.spinnerService.hide())
       );
   }
 

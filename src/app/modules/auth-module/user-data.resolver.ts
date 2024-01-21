@@ -2,7 +2,7 @@ import { ResolveFn } from '@angular/router';
 import {LoginService} from "./login.service";
 import {inject} from "@angular/core";
 import {Observable, retry, tap} from "rxjs";
-import {ApiResponseInterface} from "./models/ApiResponse.interface";
+import {AuthResponseInterface} from "./models/AuthResponse.interface";
 import {HttpClient} from "@angular/common/http";
 import {StoreService} from "../../store.service";
 import {UserDataInterface} from "../../Shared/UserData.interface";

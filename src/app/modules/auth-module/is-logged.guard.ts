@@ -12,4 +12,4 @@ export const isLoggedGuard: CanActivateFn = () => {
   if (storeService.jwtToken) {
     return of(true)
   }
-  return of(router.parseUrl('../')); };
+  return of(router.parseUrl('./')); };
