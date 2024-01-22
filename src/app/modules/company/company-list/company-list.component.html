@@ -3,7 +3,10 @@
 
     <ng-container *ngIf="companyListObs$ | async as companyList">
         <div *ngFor="let companyData of companyList">
-            <app-company-detail [companyData]="companyData"></app-company-detail>
+            <app-company-detail
+              [companyData]="companyData"
+              (companyEmployeesEmitted)="handleGetCompanyEmployees($event)"
+            ></app-company-detail>
             <!-- // button  /company/id-->
         </div>
     </ng-container>

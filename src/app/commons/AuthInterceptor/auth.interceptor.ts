@@ -6,6 +6,7 @@ import {SpinnerService} from "../../modules/spinner/spinner.service";
 
 
 export const authInterceptor: HttpInterceptorFn = (req, next) => {
+  console.log('interceptor!' + req.url)
 
   const storeService = inject(StoreService);
   const spinnerService = inject(SpinnerService);

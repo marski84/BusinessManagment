@@ -1,4 +1,4 @@
-import {Component, inject, Input} from '@angular/core';
+import {ChangeDetectionStrategy, Component, EventEmitter, inject, Input, Output} from '@angular/core';
 import {CompanyDataInterface} from "../models/Company.interface";
 import {CompanyService} from "../company.service";
 
@@ -6,20 +6,24 @@ import {CompanyService} from "../company.service";
 @Component({
   selector: 'app-company-detail',
   templateUrl: './company-detail.component.html',
-  styleUrl: './company-detail.component.css'
+  styleUrl: './company-detail.component.css',
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class CompanyDetailComponent {
   @Input()
   companyData!: CompanyDataInterface;
 
+  @Output()
+  companyEmployeesEmitted: EventEmitter<string> = new EventEmitter<string>
+
   companyService = inject(CompanyService);
 
 
   getCompanyEmployees(companyId: string) {
-    console.log(companyId)
-    // this.companyService.getWorkersList(companyId)
-    //   .subscribe()
-
+    if(!companyId) {
+      return
+    };
+    this.companyEmployeesEmitted.emit(companyId);
   }
 
 

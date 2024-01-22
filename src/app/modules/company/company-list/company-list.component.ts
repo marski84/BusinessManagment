@@ -1,6 +1,5 @@
 import {Component, inject, OnInit, Signal} from '@angular/core';
 import {CompanyService} from "../company.service";
-import {toSignal} from "@angular/core/rxjs-interop";
 import {Observable} from "rxjs";
 import {CompanyDataInterface} from "../models/Company.interface";
 
@@ -11,9 +10,17 @@ import {CompanyDataInterface} from "../models/Company.interface";
 })
 export class CompanyListComponent implements OnInit{
   companyListObs$: Observable<CompanyDataInterface[]> = inject(CompanyService).getCompanyList();
+  companySelectedSubject$  = inject(CompanyService).companySelected$;
 
 
   ngOnInit(): void {
+  }
+
+  handleGetCompanyEmployees(companyId: string) {
+    if(!companyId) {
+      return
+    }
+    this.companySelectedSubject$.next(companyId);
   }
 
 }

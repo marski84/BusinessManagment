@@ -4,10 +4,8 @@ import { MaterialModule } from '../material/material.module';
 import { CompanyListComponent } from './company-list/company-list.component';
 import { CompanyDetailComponent } from './company-detail/company-detail.component';
 import { CompanyService } from './company.service';
-import {HTTP_INTERCEPTORS, HttpClientModule, provideHttpClient, withInterceptors} from '@angular/common/http';
-import { SpinnerComponent } from '../spinner/spinner/spinner.component';
+import { HttpClientModule, provideHttpClient, withInterceptors} from '@angular/common/http';
 import { SpinnerModule } from '../spinner/spinner.module';
-import { WorkerModule } from '../worker/worker.module';
 import {authInterceptor} from "../../commons/AuthInterceptor/auth.interceptor";
 
 @NgModule({

@@ -2,11 +2,11 @@ import {FormDataInterface} from "./models/FormData.interface";
 import {LoginService} from "./login.service";
 import {inject} from "@angular/core";
 
-export class AbstractAuthenticationComponent {
-  loginService: LoginService = inject(LoginService);
+export abstract class AbstractAuthenticationComponent {
+  abstract loginService: LoginService;
 
 
-  onFormSubmit(event: FormDataInterface) {
+   onFormSubmit(event: FormDataInterface) {
   }
 
   // abstract onFormSubmit(event: FormDataInterface) {
