@@ -1,8 +1,7 @@
 <p>worker-list works!</p>
 <ng-container *ngIf="companySelected$ | async as employees">
-<!--   <div *ngFor="let employee of employees"> -->
-<!--     {{employee | json}} -->
-<!--   </div> -->
-  {{employees | json}}
+  <div *ngFor="let employee of employees">
+    {{employee | json}}
+  </div>
 </ng-container>
 

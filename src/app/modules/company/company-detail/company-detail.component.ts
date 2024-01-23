@@ -1,5 +1,5 @@
 import {ChangeDetectionStrategy, Component, EventEmitter, inject, Input, Output} from '@angular/core';
-import {CompanyDataInterface} from "../models/Company.interface";
+import {CompanyDataInterface} from "../../../Shared/Company.interface";
 import {CompanyService} from "../company.service";
 
 

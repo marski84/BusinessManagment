@@ -1,7 +1,7 @@
 import {Component, inject, OnInit, Signal} from '@angular/core';
 import {CompanyService} from "../company.service";
 import {Observable} from "rxjs";
-import {CompanyDataInterface} from "../models/Company.interface";
+import {CompanyDataInterface} from "../../../Shared/Company.interface";
 
 @Component({
   selector: 'app-company-list',
