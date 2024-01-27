@@ -1,5 +1,7 @@
-import {ChangeDetectionStrategy, Component, Input} from '@angular/core';
+import {ChangeDetectionStrategy, Component, inject, Input} from '@angular/core';
 import {WorkerData} from "../../../Shared/WorkerData.interface";
+import {Dialog} from "@angular/cdk/dialog";
+import {WorkerFormComponent} from "../worker-form/worker-form.component";
 
 @Component({
   selector: 'app-worker-details',
@@ -8,8 +10,17 @@ import {WorkerData} from "../../../Shared/WorkerData.interface";
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class WorkerDetailsComponent {
+  readonly dialog = inject(Dialog);
+
   @Input()
   workerData!: WorkerData;
+
+  handleEditWorkerData() {
+    this.dialog.open(WorkerFormComponent, {
+      data: this.workerData
+    }
+    )
+  }
 
 // {
 //   "_id": "6585b4fa41009f7f38bb2a4a",

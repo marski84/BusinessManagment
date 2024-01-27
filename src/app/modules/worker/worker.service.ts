@@ -1,11 +1,9 @@
 import {DestroyRef, inject, Injectable} from '@angular/core';
 import {map, Observable, of, Subscription, tap} from "rxjs";
-import {CompanyDataInterface, CompanyResponseInterface} from "../../Shared/Company.interface";
 import {takeUntilDestroyed} from "@angular/core/rxjs-interop";
 import {SpinnerService} from "../spinner/spinner.service";
 import {HttpClient} from "@angular/common/http";
 import {environment} from "../../../environments/environment";
-import {CompanyService} from "../company/company.service";
 import {CompanyWorkersResponseInterface} from "../../Shared/CompanyWorkers.interface";
 import {WorkerData} from "../../Shared/WorkerData.interface";
 
