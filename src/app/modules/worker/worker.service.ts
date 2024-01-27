@@ -6,7 +6,8 @@ import {SpinnerService} from "../spinner/spinner.service";
 import {HttpClient} from "@angular/common/http";
 import {environment} from "../../../environments/environment";
 import {CompanyService} from "../company/company.service";
-import {CompanyWorkersResponseInterface, WorkerData} from "../../Shared/CompanyWorkers.interface";
+import {CompanyWorkersResponseInterface} from "../../Shared/CompanyWorkers.interface";
+import {WorkerData} from "../../Shared/WorkerData.interface";
 
 @Injectable()
 export class WorkerService {
@@ -20,6 +21,8 @@ export class WorkerService {
 
   private readonly companyListUrl =
     `${this.baseApiUrl}/companies`;
+
+  private readonly workerApiBaseUrl = `${this.baseApiUrl}/workers`
   getWorkersList(companyId: string): Observable<WorkerData[]> {
     const workersListUrl = `${this.companyListUrl}/${companyId}/workers`;
 
@@ -29,8 +32,23 @@ export class WorkerService {
         takeUntilDestroyed(this.destroyRef),
         map((data) => data.data),
         tap((data) => console.log(data)),
-      )
-      // .subscribe()
+      );
+  };
 
+// {
+//   "_id": "6585b4fa41009f7f38bb2a4a",
+//   "name": "Adam",
+//   "surname": "Goodman",
+//   "companyId": "6585b4fa41009f7f38bb2a49"
+// }
+  updateWorkerData() {
+    return this.http.put(`${this.workerApiBaseUrl}/6585b4fa41009f7f38bb2a4a`,
+      {
+        _id: "6585b4fa41009f7f38bb2a4a",
+        companyId: '6585b4fa41009f7f38bb2a49',
+        name: 'test',
+        surname: 'test',
+        education: 'test'
+    }).subscribe(data => console.log(data))
   }
 }

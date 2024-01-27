@@ -1,11 +1,11 @@
 <ng-container *ngIf="data() as userInfo">
   <app-panel-header [userData]="userInfo['userData']"></app-panel-header>
 
-  <mat-sidenav-container autosize class="example-container">
-  <mat-sidenav [opened]="true" mode="side" class="example-sidenav">
+  <mat-sidenav-container autosize class="sidenav-container">
+  <mat-sidenav [opened]="true" mode="side" class="sidenav">
     <app-company-list></app-company-list>
   </mat-sidenav>
-  <mat-sidenav-content class="sidenav-content">
+  <mat-sidenav-content>
     <app-worker-list></app-worker-list>
   </mat-sidenav-content>
 </mat-sidenav-container>

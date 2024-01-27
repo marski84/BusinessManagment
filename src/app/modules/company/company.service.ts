@@ -26,10 +26,5 @@ export class CompanyService {
       );
   }
 
-  getCompanyWorkersList(): Observable<any> {
-    return this.http
-      .get(`${this.companyListUrl}/`)
-  }
-
 
 }

@@ -4,7 +4,7 @@ import {filter, map, Observable, of, switchMap, tap} from "rxjs";
 import {takeUntilDestroyed} from "@angular/core/rxjs-interop";
 import {WorkerService} from "../worker.service";
 import {CompanyDataInterface} from "../../../Shared/Company.interface";
-import {WorkerData} from "../../../Shared/CompanyWorkers.interface";
+import {WorkerData} from "../../../Shared/WorkerData.interface";
 
 @Component({
   selector: 'app-worker-list',
@@ -23,8 +23,13 @@ export class WorkerListComponent {
       filter((companyId) => companyId !== ''),
       switchMap((companyId) =>
         this.workerService.getWorkersList(companyId)),
+      map(workerData => workerData),
       tap(data => console.log(data))
     )
 
+
+  test() {
+    this.workerService.updateWorkerData()
+  }
 
 }

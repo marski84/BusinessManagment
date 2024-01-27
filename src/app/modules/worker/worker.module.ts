@@ -5,17 +5,21 @@ import {WorkerFormComponent} from "./worker-form/worker-form.component";
 import {HttpClientModule, provideHttpClient, withInterceptors} from "@angular/common/http";
 import {authInterceptor} from "../../commons/AuthInterceptor/auth.interceptor";
 import {WorkerService} from "./worker.service";
+import {WorkerDetailsComponent} from "./worker-details/worker-details.component";
+import {MaterialModule} from "../material/material.module";
 
 
 
 @NgModule({
   declarations: [
     WorkerListComponent,
-    WorkerFormComponent
+    WorkerFormComponent,
+    WorkerDetailsComponent
   ],
   imports: [
     CommonModule,
-    HttpClientModule
+    HttpClientModule,
+    MaterialModule
   ],
   exports: [
     WorkerListComponent

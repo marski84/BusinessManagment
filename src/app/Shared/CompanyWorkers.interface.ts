@@ -1,11 +1,5 @@
-export interface WorkerData {
-  _id: string,
-  name: string,
-  surname: string,
-  companyId: string
-}
+import {WorkerData} from "./WorkerData.interface";
 
-// CompanyWorkersReponseInterface .map(res => res.data)
 export interface CompanyWorkersResponseInterface {
-  data: WorkerData[]
+  data: WorkerData[];
 }
