@@ -7,7 +7,7 @@ import {LogoutComponent} from "./logout/logout.component";
 import {PanelComponent} from "./panel/panel.component";
 import {CompanyModule} from "../company/company.module";
 import {WorkerModule} from "../worker/worker.module";
-import {RouterModule, RouterOutlet, Routes} from "@angular/router";
+import {RouterOutlet} from "@angular/router";
 import {PanelRoutingModule} from "./panel-routing.module";
 
 

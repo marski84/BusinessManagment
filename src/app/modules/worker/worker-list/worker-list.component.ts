@@ -3,7 +3,6 @@ import {CompanyService} from "../../company/company.service";
 import {filter, map, Observable, of, switchMap, tap} from "rxjs";
 import {takeUntilDestroyed} from "@angular/core/rxjs-interop";
 import {WorkerService} from "../worker.service";
-import {CompanyDataInterface} from "../../../Shared/Company.interface";
 import {WorkerData} from "../../../Shared/WorkerData.interface";
 
 @Component({

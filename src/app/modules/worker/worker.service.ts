@@ -17,6 +17,8 @@ export class WorkerService {
 
   constructor() { }
 
+  // http://universities.hipolabs.com/search?country=Poland
+
   private readonly companyListUrl =
     `${this.baseApiUrl}/companies`;
 

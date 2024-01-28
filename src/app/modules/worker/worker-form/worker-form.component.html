@@ -1,12 +1,41 @@
-<form action="/">
-  <h1>Employee personal data</h1>
-  <div class="info">
-    <input class="fname" type="text" name="name" placeholder="Name">
-    <input type="text" name="name" placeholder="Surname">
-    <input type="text" name="name" placeholder="Education">
-    <input type="text" name="name" placeholder="Company Name">
+<h1 mat-dialog-title>Employee personal data</h1>
 
-  </div>
+<mat-dialog-content [formGroup]="workerForm">
+  <form >
+    <div class="info">
+      <input
 
-  <button type="submit" href="/">Submit</button>
-</form>
+        [formControl]="workerForm.controls.firstName"
+        class="fname" type="text" name="name" placeholder="Name">
+
+      <input
+        [formControl]="workerForm.controls.lastName"
+        type="text" name="name" placeholder="Surname">
+
+      <input
+        [formControl]="workerForm.controls.education"
+        type="text" name="name" placeholder="Education">
+
+<!--       <mat-form-field> -->
+<!--         <mat-label>Favorite food</mat-label> -->
+<!--         <mat-select [(ngModel)]="selectedValue" name="food"> -->
+<!--           @for (food of foods; track food) { -->
+<!--             <mat-option [value]="food.value">{{food.viewValue}}</mat-option> -->
+<!--           } -->
+<!--         </mat-select> -->
+<!--       </mat-form-field> -->
+
+
+      <input
+        [formControl]="workerForm.controls.companyName"
+        type="text" name="name" placeholder="Company Name">
+    </div>
+
+  </form>
+</mat-dialog-content>
+
+<mat-dialog-actions>
+  <button mat-dialog-close [matDialogClose]="handleDataEdit()">Edit</button>
+  <button mat-dialog-close>Cancel</button>
+</mat-dialog-actions>
+

@@ -7,6 +7,7 @@ import {authInterceptor} from "../../commons/AuthInterceptor/auth.interceptor";
 import {WorkerService} from "./worker.service";
 import {WorkerDetailsComponent} from "./worker-details/worker-details.component";
 import {MaterialModule} from "../material/material.module";
+import {ReactiveFormsModule} from "@angular/forms";
 
 
 
@@ -19,7 +20,9 @@ import {MaterialModule} from "../material/material.module";
   imports: [
     CommonModule,
     HttpClientModule,
-    MaterialModule
+    MaterialModule,
+    ReactiveFormsModule,
+
   ],
   exports: [
     WorkerListComponent

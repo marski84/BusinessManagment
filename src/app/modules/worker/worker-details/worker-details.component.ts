@@ -2,6 +2,7 @@ import {ChangeDetectionStrategy, Component, inject, Input} from '@angular/core';
 import {WorkerData} from "../../../Shared/WorkerData.interface";
 import {Dialog} from "@angular/cdk/dialog";
 import {WorkerFormComponent} from "../worker-form/worker-form.component";
+import {MatDialog, MatDialogConfig} from "@angular/material/dialog";
 
 @Component({
   selector: 'app-worker-details',
@@ -10,16 +11,25 @@ import {WorkerFormComponent} from "../worker-form/worker-form.component";
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class WorkerDetailsComponent {
-  readonly dialog = inject(Dialog);
+  private readonly dialog = inject(MatDialog);
+  private readonly dialogConfig: MatDialogConfig = {
+    disableClose: true,
+    hasBackdrop: true
+  }
 
   @Input()
   workerData!: WorkerData;
+  @Input()
+  companyName!: string;
 
   handleEditWorkerData() {
-    this.dialog.open(WorkerFormComponent, {
-      data: this.workerData
+    this.dialogConfig.data = this.workerData;
+    const dialogRef = this.dialog.open(WorkerFormComponent, {
+      ...this.dialogConfig
     }
     )
+
+    dialogRef.afterClosed().subscribe(data => console.log(data))
   }
 
 // {
