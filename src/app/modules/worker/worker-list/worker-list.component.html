@@ -1,6 +1,10 @@
-<ng-container class="company-list-container" *ngIf="companySelected$ | async as employees">
-  <div *ngFor="let employee of employees">
-  <app-worker-details [workerData]="employee" [companyName]="'todo'"></app-worker-details>
+<ng-container class="company-list-container" *ngIf="companySelected$ | async
+as ProcessedCompanyEmployeesData">
+
+  <div *ngFor="let employee of ProcessedCompanyEmployeesData.employees">
+  <app-worker-details
+    [workerData]="employee"
+    [companyName]="ProcessedCompanyEmployeesData.companyName"></app-worker-details>
   </div>
 
   <button mat-button (click)="test()">Add employee</button>

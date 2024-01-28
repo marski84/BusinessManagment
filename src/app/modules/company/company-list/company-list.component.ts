@@ -16,11 +16,11 @@ export class CompanyListComponent implements OnInit{
   ngOnInit(): void {
   }
 
-  handleGetCompanyEmployees(companyId: string) {
-    if(!companyId) {
+  handleGetCompanyEmployees(companyData: CompanyDataInterface) {
+    if(!companyData) {
       return
     }
-    this.companySelectedSubject$.next(companyId);
+    this.companySelectedSubject$.next(companyData);
   }
 
 }

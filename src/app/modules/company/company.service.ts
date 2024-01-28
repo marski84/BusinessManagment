@@ -1,6 +1,6 @@
 import { DestroyRef, inject, Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import {BehaviorSubject, map, Observable} from 'rxjs';
+import {BehaviorSubject, map, Observable, Subject} from 'rxjs';
 import { SpinnerService } from '../spinner/spinner.service';
 import {CompanyDataInterface, CompanyResponseInterface} from '../../Shared/Company.interface';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
@@ -13,7 +13,8 @@ export class CompanyService {
   private readonly destroyRef = inject(DestroyRef);
   private readonly companyListUrl =environment.apiBaseUrl;
 
-  companySelected$ = new BehaviorSubject<string>('');
+  companySelected$ = new Subject<CompanyDataInterface>();
+  // <CompanyDataInterface>();
 
   constructor() {}
 

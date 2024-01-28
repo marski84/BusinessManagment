@@ -14,16 +14,16 @@ export class CompanyDetailComponent {
   companyData!: CompanyDataInterface;
 
   @Output()
-  companyEmployeesEmitted: EventEmitter<string> = new EventEmitter<string>
+  companyEmployeesEmitted: EventEmitter<CompanyDataInterface> = new EventEmitter<CompanyDataInterface>
 
   companyService = inject(CompanyService);
 
 
-  getCompanyEmployees(companyId: string) {
-    if(!companyId) {
+  getCompanyEmployees(companyData: CompanyDataInterface) {
+    if(!companyData) {
       return
     };
-    this.companyEmployeesEmitted.emit(companyId);
+    this.companyEmployeesEmitted.emit(companyData);
   }
 
 

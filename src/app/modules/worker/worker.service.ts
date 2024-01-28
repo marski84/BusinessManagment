@@ -1,11 +1,12 @@
 import {DestroyRef, inject, Injectable} from '@angular/core';
-import {map, Observable, of, Subscription, tap} from "rxjs";
+import {map, Observable, tap} from "rxjs";
 import {takeUntilDestroyed} from "@angular/core/rxjs-interop";
 import {SpinnerService} from "../spinner/spinner.service";
 import {HttpClient} from "@angular/common/http";
 import {environment} from "../../../environments/environment";
 import {CompanyWorkersResponseInterface} from "../../Shared/CompanyWorkers.interface";
-import {WorkerData} from "../../Shared/WorkerData.interface";
+import {CompanyDataInterface} from "../../Shared/Company.interface";
+import {ProcessedCompanyWorkersDataInterface} from "../../Shared/ProcessedCompanyWorkersData.interface";
 
 @Injectable()
 export class WorkerService {
@@ -23,14 +24,19 @@ export class WorkerService {
     `${this.baseApiUrl}/companies`;
 
   private readonly workerApiBaseUrl = `${this.baseApiUrl}/workers`
-  getWorkersList(companyId: string): Observable<WorkerData[]> {
-    const workersListUrl = `${this.companyListUrl}/${companyId}/workers`;
+  getWorkersList(companyData: CompanyDataInterface): Observable<ProcessedCompanyWorkersDataInterface> {
+    const workersListUrl = `${this.companyListUrl}/${companyData._id}/workers`;
 
     return this.http
       .get<CompanyWorkersResponseInterface>(workersListUrl)
       .pipe(
         takeUntilDestroyed(this.destroyRef),
-        map((data) => data.data),
+        map((data): ProcessedCompanyWorkersDataInterface => {
+          return {
+            employees: data.data,
+            companyName: companyData.name
+          }
+        }),
         tap((data) => console.log(data)),
       );
   };

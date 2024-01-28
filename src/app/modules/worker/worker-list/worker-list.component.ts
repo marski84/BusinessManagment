@@ -4,6 +4,7 @@ import {filter, map, Observable, of, switchMap, tap} from "rxjs";
 import {takeUntilDestroyed} from "@angular/core/rxjs-interop";
 import {WorkerService} from "../worker.service";
 import {WorkerData} from "../../../Shared/WorkerData.interface";
+import {ProcessedCompanyWorkersDataInterface} from "../../../Shared/ProcessedCompanyWorkersData.interface";
 
 @Component({
   selector: 'app-worker-list',
@@ -16,12 +17,12 @@ export class WorkerListComponent {
   private readonly workerService = inject(WorkerService);
   private readonly companyService = inject(CompanyService);
 
- companySelected$: Observable<WorkerData[]> = this.companyService.companySelected$
+ companySelected$: Observable<ProcessedCompanyWorkersDataInterface> = this.companyService.companySelected$
     .pipe(
       takeUntilDestroyed(this.destroyRef$),
-      filter((companyId) => companyId !== ''),
-      switchMap((companyId) =>
-        this.workerService.getWorkersList(companyId)),
+      filter((companyData) => companyData !== null),
+      switchMap((companyData) =>
+        this.workerService.getWorkersList(companyData)),
       map(workerData => workerData),
       tap(data => console.log(data))
     )
