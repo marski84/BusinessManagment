@@ -4,7 +4,7 @@ as ProcessedCompanyEmployeesData">
   <div *ngFor="let employee of ProcessedCompanyEmployeesData.employees">
   <app-worker-details
     [workerData]="employee"
-    [companyName]="ProcessedCompanyEmployeesData.companyName"></app-worker-details>
+  ></app-worker-details>
   </div>
 
   <button mat-button (click)="test()">Add employee</button>

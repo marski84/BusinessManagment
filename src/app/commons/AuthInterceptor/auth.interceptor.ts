@@ -34,7 +34,7 @@ export const authInterceptor: HttpInterceptorFn = (req, next) => {
         if (err.status !== 200) {
         alert('Http error occured')
       }
-      return throwError(err);
+      return throwError(() => err);
     }),
       finalize(() => {
             spinnerService.hide()

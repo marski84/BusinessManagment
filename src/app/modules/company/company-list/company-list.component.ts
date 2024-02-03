@@ -17,9 +17,9 @@ export class CompanyListComponent implements OnInit{
   }
 
   handleGetCompanyEmployees(companyData: CompanyDataInterface) {
-    if(!companyData) {
-      return
-    }
+    // if(!companyData) {
+    //   return
+    // }
     this.companySelectedSubject$.next(companyData);
   }
 

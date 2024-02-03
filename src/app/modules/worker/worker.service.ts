@@ -32,9 +32,10 @@ export class WorkerService {
       .pipe(
         takeUntilDestroyed(this.destroyRef),
         map((data): ProcessedCompanyWorkersDataInterface => {
+          const employees = data.data;
+          employees.forEach(employee => employee.companyName = companyData.name)
           return {
-            employees: data.data,
-            companyName: companyData.name
+            employees: employees
           }
         }),
         tap((data) => console.log(data)),

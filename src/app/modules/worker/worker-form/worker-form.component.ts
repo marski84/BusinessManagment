@@ -43,6 +43,7 @@ export class WorkerFormComponent implements OnInit{
     if (this.workerData) {
       this.workerForm.controls.firstName.setValue(this.workerData.name)
       this.workerForm.controls.lastName.setValue(this.workerData.surname)
+      this.workerForm.controls.companyName.setValue(this.workerData.companyName)
       if (this.workerData.education) {
         this.workerForm.controls.education.setValue(this.workerData.education)
       }

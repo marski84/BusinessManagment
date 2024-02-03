@@ -19,8 +19,7 @@ export class WorkerDetailsComponent {
 
   @Input()
   workerData!: WorkerData;
-  @Input()
-  companyName!: string;
+
 
   handleEditWorkerData() {
     this.dialogConfig.data = this.workerData;
