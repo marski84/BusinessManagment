@@ -1,8 +1,8 @@
 export interface WorkerData {
-  companyName: string;
+  companyId: string,
+  companyName?: string;
   _id: string,
   name: string,
   surname: string,
-  companyId: string,
   education?: string
 }

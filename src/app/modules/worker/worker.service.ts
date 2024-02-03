@@ -7,6 +7,8 @@ import {environment} from "../../../environments/environment";
 import {CompanyWorkersResponseInterface} from "../../Shared/CompanyWorkers.interface";
 import {CompanyDataInterface} from "../../Shared/Company.interface";
 import {ProcessedCompanyWorkersDataInterface} from "../../Shared/ProcessedCompanyWorkersData.interface";
+import {WorkerData} from "../../Shared/WorkerData.interface";
+import {CompanyService} from "../company/company.service";
 
 @Injectable()
 export class WorkerService {
@@ -15,6 +17,7 @@ export class WorkerService {
   private readonly http = inject(HttpClient);
   private readonly destroyRef = inject(DestroyRef);
   private readonly baseApiUrl = environment.apiBaseUrl;
+  private readonly companyService = inject(CompanyService);
 
   constructor() { }
 
@@ -26,6 +29,8 @@ export class WorkerService {
   private readonly workerApiBaseUrl = `${this.baseApiUrl}/workers`
   getWorkersList(companyData: CompanyDataInterface): Observable<ProcessedCompanyWorkersDataInterface> {
     const workersListUrl = `${this.companyListUrl}/${companyData._id}/workers`;
+    console.log('worker list')
+    console.log(companyData)
 
     return this.http
       .get<CompanyWorkersResponseInterface>(workersListUrl)
@@ -48,14 +53,25 @@ export class WorkerService {
 //   "surname": "Goodman",
 //   "companyId": "6585b4fa41009f7f38bb2a49"
 // }
-  updateWorkerData() {
-    return this.http.put(`${this.workerApiBaseUrl}/6585b4fa41009f7f38bb2a4a`,
+  updateWorkerData(workerUpdatedData: WorkerData) {
+    console.log(workerUpdatedData)
+    return this.http.put(`${this.workerApiBaseUrl}/${workerUpdatedData._id}`,
       {
-        _id: "6585b4fa41009f7f38bb2a4a",
-        companyId: '6585b4fa41009f7f38bb2a49',
-        name: 'test',
-        surname: 'test',
-        education: 'test'
-    }).subscribe(data => console.log(data))
+        _id: workerUpdatedData._id,
+        companyId: workerUpdatedData.companyId,
+        name: workerUpdatedData.name,
+        surname: workerUpdatedData.surname,
+        education: workerUpdatedData.education
+    }).subscribe(
+      (success) => {
+        this.companyService.companySelected$.next(
+          <CompanyDataInterface>{
+            _id: workerUpdatedData.companyId,
+            name: workerUpdatedData.companyName
+          }
+        )
+      }
+    )
+
   }
 }

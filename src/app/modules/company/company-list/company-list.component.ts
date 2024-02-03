@@ -9,8 +9,9 @@ import {CompanyDataInterface} from "../../../Shared/Company.interface";
   styleUrl: './company-list.component.css'
 })
 export class CompanyListComponent implements OnInit{
+  companyService =  inject(CompanyService)
   companyListObs$: Observable<CompanyDataInterface[]> = inject(CompanyService).getCompanyList();
-  companySelectedSubject$  = inject(CompanyService).companySelected$;
+  companySelectedSubject$  = this.companyService.companySelected$;
 
 
   ngOnInit(): void {
@@ -20,7 +21,9 @@ export class CompanyListComponent implements OnInit{
     // if(!companyData) {
     //   return
     // }
-    this.companySelectedSubject$.next(companyData);
+    console.log('click')
+    console.log(companyData)
+    this.companyService.companySelected$.next(companyData);
   }
 
 }

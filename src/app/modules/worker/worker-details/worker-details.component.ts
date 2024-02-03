@@ -1,8 +1,11 @@
-import {ChangeDetectionStrategy, Component, inject, Input} from '@angular/core';
+import {ChangeDetectionStrategy, Component, DestroyRef, inject, Input} from '@angular/core';
 import {WorkerData} from "../../../Shared/WorkerData.interface";
-import {Dialog} from "@angular/cdk/dialog";
 import {WorkerFormComponent} from "../worker-form/worker-form.component";
 import {MatDialog, MatDialogConfig} from "@angular/material/dialog";
+import {WorkerService} from "../worker.service";
+import {filter, tap} from "rxjs";
+import {Dialog} from "@angular/cdk/dialog";
+import {takeUntilDestroyed} from "@angular/core/rxjs-interop";
 
 @Component({
   selector: 'app-worker-details',
@@ -11,7 +14,9 @@ import {MatDialog, MatDialogConfig} from "@angular/material/dialog";
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class WorkerDetailsComponent {
+  private readonly workerService = inject(WorkerService);
   private readonly dialog = inject(MatDialog);
+  private readonly destoyRef = inject(DestroyRef);
   private readonly dialogConfig: MatDialogConfig = {
     disableClose: true,
     hasBackdrop: true
@@ -28,7 +33,13 @@ export class WorkerDetailsComponent {
     }
     )
 
-    dialogRef.afterClosed().subscribe(data => console.log(data))
+    dialogRef.afterClosed()
+      .pipe(
+        takeUntilDestroyed(this.destoyRef),
+        filter((data) => data),
+        tap(data => this.workerService.updateWorkerData(data))
+      )
+      .subscribe(data => console.log(data))
   }
 
 // {

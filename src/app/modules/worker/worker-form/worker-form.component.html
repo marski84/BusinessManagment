@@ -3,38 +3,47 @@
 <mat-dialog-content [formGroup]="workerForm">
   <form >
     <div class="info">
+
+      <label for="name">First name</label>
       <input
-
         [formControl]="workerForm.controls.firstName"
-        class="fname" type="text" name="name" placeholder="Name">
+        id="name"
+        class="fname"
+        type="text"
+        name="name"
+        placeholder="Name">
 
+      <label for="lastName">Last name</label>
       <input
         [formControl]="workerForm.controls.lastName"
-        type="text" name="name" placeholder="Surname">
+        id="lastName"
+        type="text"
+        name="name"
+        placeholder="Surname">
 
+      <label for="education">Education</label>
       <input
+        id="education"
         [formControl]="workerForm.controls.education"
-        type="text" name="name" placeholder="Education">
+        type="text"
+        name="name"
+        placeholder="Education">
 
-<!--       <mat-form-field> -->
-<!--         <mat-label>Favorite food</mat-label> -->
-<!--         <mat-select [(ngModel)]="selectedValue" name="food"> -->
-<!--           @for (food of foods; track food) { -->
-<!--             <mat-option [value]="food.value">{{food.viewValue}}</mat-option> -->
-<!--           } -->
-<!--         </mat-select> -->
-<!--       </mat-form-field> -->
 
+      <label for="company">Company</label>
       <input
+        id="company"
         [formControl]="workerForm.controls.companyName"
-        type="text" name="name" placeholder="Company Name">
+        type="text"
+        name="name"
+        placeholder="Company Name">
     </div>
 
   </form>
 </mat-dialog-content>
 
 <mat-dialog-actions>
-  <button mat-dialog-close [matDialogClose]="handleDataEdit()">Edit</button>
-  <button mat-dialog-close>Cancel</button>
+  <button (click)="handleDataEdit()">Edit</button>
+  <button (click)="handleCancel()">Cancel</button>
 </mat-dialog-actions>
 

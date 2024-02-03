@@ -7,7 +7,7 @@ import {
 } from "@angular/forms";
 import {WorkerData} from "../../../Shared/WorkerData.interface";
 import {DialogRef} from "@angular/cdk/dialog";
-import {MAT_DIALOG_DATA} from "@angular/material/dialog";
+import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material/dialog";
 
 export interface WorkerFormInterface {
   firstName: FormControl<string>,
@@ -24,6 +24,7 @@ export interface WorkerFormInterface {
 export class WorkerFormComponent implements OnInit{
   private readonly workerData: WorkerData;
   private readonly fb = inject(NonNullableFormBuilder);
+  private readonly dialogRef = inject(MatDialogRef<WorkerFormComponent>);
 
 
   workerForm: FormGroup<WorkerFormInterface> = this.fb.group({
@@ -43,7 +44,9 @@ export class WorkerFormComponent implements OnInit{
     if (this.workerData) {
       this.workerForm.controls.firstName.setValue(this.workerData.name)
       this.workerForm.controls.lastName.setValue(this.workerData.surname)
-      this.workerForm.controls.companyName.setValue(this.workerData.companyName)
+      if (this.workerData.companyName) {
+        this.workerForm.controls.companyName.setValue(this.workerData.companyName)
+      }
       if (this.workerData.education) {
         this.workerForm.controls.education.setValue(this.workerData.education)
       }
@@ -56,7 +59,21 @@ export class WorkerFormComponent implements OnInit{
       return
     }
 
-    return {...this.workerData, ...this.workerForm.getRawValue()}
+    const result: WorkerData = {
+      _id: this.workerData._id,
+      companyId: this.workerData.companyId,
+      name: this.workerForm.controls.firstName.value,
+      surname: this.workerForm.controls.lastName.value,
+      companyName: this.workerForm.controls.companyName.getRawValue(),
+      education: this.workerForm.controls.education.value
+    }
+    console.log(result)
+
+    this.dialogRef.close(result)
+  }
+
+  handleCancel() {
+    this.dialogRef.close()
   }
 
 
