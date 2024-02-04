@@ -23,7 +23,10 @@ export class CompanyListComponent implements OnInit{
     // }
     console.log('click')
     console.log(companyData)
-    this.companyService.companySelected$.next(companyData);
-  }
+    if(companyData) {
+      this.companyService.companySelected$.next(companyData);
+
+    }
+ }
 
 }

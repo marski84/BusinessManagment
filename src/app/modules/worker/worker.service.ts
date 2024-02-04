@@ -1,5 +1,5 @@
 import {DestroyRef, inject, Injectable} from '@angular/core';
-import {map, Observable, tap} from "rxjs";
+import {catchError, EMPTY, map, Observable, of, tap, throwError} from "rxjs";
 import {takeUntilDestroyed} from "@angular/core/rxjs-interop";
 import {SpinnerService} from "../spinner/spinner.service";
 import {HttpClient} from "@angular/common/http";
@@ -36,6 +36,10 @@ export class WorkerService {
       .get<CompanyWorkersResponseInterface>(workersListUrl)
       .pipe(
         takeUntilDestroyed(this.destroyRef),
+        catchError((err) => {
+          console.log(err);
+          return throwError(() => of(err));
+        }),
         map((data): ProcessedCompanyWorkersDataInterface => {
           const employees = data.data;
           employees.forEach(employee => employee.companyName = companyData.name)

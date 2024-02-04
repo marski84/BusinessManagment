@@ -1,6 +1,6 @@
 import {Component, DestroyRef, inject} from '@angular/core';
 import {CompanyService} from "../../company/company.service";
-import {catchError, filter, map, Observable, of, switchMap, tap} from "rxjs";
+import {catchError, EMPTY, filter, ignoreElements, map, Observable, of, switchMap, tap, throwError} from "rxjs";
 import {takeUntilDestroyed} from "@angular/core/rxjs-interop";
 import {WorkerService} from "../worker.service";
 import {WorkerData} from "../../../Shared/WorkerData.interface";
@@ -19,14 +19,22 @@ export class WorkerListComponent {
 
  companySelected$: Observable<ProcessedCompanyWorkersDataInterface> = this.companyService.companySelected$
     .pipe(
+      catchError(err => throwError(() => {
+        console.log(err)
+        return EMPTY
+      })),
       tap(()=>console.log('company selected')),
       takeUntilDestroyed(this.destroyRef$),
-      filter((companyData) => companyData !== null),
-      tap(data => console.log(data)),
+      // filter((companyData) => companyData !== null),
       switchMap((companyData) =>
         this.workerService.getWorkersList(companyData)
       ),
-      tap(data => console.log(data)),
+    )
+
+  companySelectedError$ = this.companySelected$
+    .pipe(
+      ignoreElements(),
+      catchError(err => of(err))
     )
 
 

@@ -1,12 +1,26 @@
-<ng-container class="company-list-container" *ngIf="companySelected$ | async
-as ProcessedCompanyEmployeesData">
+<ng-container class="company-list-container"
+              *ngIf="
+              {
+              companyData: companySelected$ | async,
+              error: companySelectedError$ | async
+              } as data,
+"
+>
 
-  <div *ngFor="let employee of ProcessedCompanyEmployeesData.employees">
-  <app-worker-details
-    [workerData]="employee"
-  ></app-worker-details>
-  </div>
+  <ng-container *ngIf="data.companyData && data.companyData?.employees?.length">
+    <div *ngFor="let employee of data.companyData?.employees">
+      <app-worker-details
+        [workerData]="employee"
+      ></app-worker-details>
+    </div>
+  </ng-container>
 
-<!--   <button mat-button (click)="test()">Add employee</button> -->
+  <ng-container *ngIf="data.companyData?.employees?.length === 0">
+    <h1>No employees registered!</h1>
+  </ng-container>
+
+  <ng-container *ngIf="data.error">
+    {{data.error | json}}
+  </ng-container>
+
 </ng-container>
-

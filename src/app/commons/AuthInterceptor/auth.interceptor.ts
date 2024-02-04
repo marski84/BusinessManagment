@@ -1,6 +1,6 @@
 import {HttpErrorResponse, HttpInterceptorFn} from '@angular/common/http';
 import {inject} from "@angular/core";
-import {catchError, finalize, retry, tap, throwError} from "rxjs";
+import {catchError, EMPTY, finalize, of, retry, tap, throwError} from "rxjs";
 import {StoreService} from "../../store.service";
 import {SpinnerService} from "../../modules/spinner/spinner.service";
 
@@ -28,13 +28,14 @@ export const authInterceptor: HttpInterceptorFn = (req, next) => {
       retry(3),
       catchError((err: HttpErrorResponse) => {
         spinnerService.hide()
-        return throwError(err);
+        return throwError(() => err);
       }),
       catchError((err: HttpErrorResponse) => {
         if (err.status !== 200) {
         alert('Http error occured')
       }
-      return throwError(() => err);
+        console.log('error throw')
+        return throwError(() => of((err)));
     }),
       finalize(() => {
             spinnerService.hide()
