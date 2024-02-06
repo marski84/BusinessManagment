@@ -29,7 +29,6 @@ import {ReactiveFormsModule} from "@angular/forms";
   ],
   providers: [
     WorkerService,
-    provideHttpClient(withInterceptors([authInterceptor]))
   ],
 })
 export class WorkerModule { }

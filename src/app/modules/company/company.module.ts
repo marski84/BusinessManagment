@@ -12,13 +12,12 @@ import {authInterceptor} from "../../commons/AuthInterceptor/auth.interceptor";
   declarations: [CompanyListComponent, CompanyDetailComponent],
   imports: [
     CommonModule,
-    HttpClientModule,
+    // HttpClientModule,
     MaterialModule,
     SpinnerModule
   ],
   exports: [CompanyListComponent],
   providers: [
-    provideHttpClient(withInterceptors([authInterceptor]))
   ],
 })
 export class CompanyModule {}

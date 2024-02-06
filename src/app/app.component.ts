@@ -17,7 +17,7 @@ import { SpinnerModule } from './modules/spinner/spinner.module';
 import { tap } from 'rxjs';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { MaterialModule } from './modules/material/material.module';
-import { provideHttpClient, withInterceptors } from '@angular/common/http';
+import {HttpClientModule, provideHttpClient, withInterceptors} from '@angular/common/http';
 import { authInterceptor } from './commons/AuthInterceptor/auth.interceptor';
 
 @Component({
@@ -29,8 +29,10 @@ import { authInterceptor } from './commons/AuthInterceptor/auth.interceptor';
     AuthModule,
     SpinnerModule,
     MaterialModule,
+    // HttpClientModule
   ],
-  providers: [],
+  providers: [
+  ],
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css'],
 })

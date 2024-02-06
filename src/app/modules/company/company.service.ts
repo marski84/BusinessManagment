@@ -1,4 +1,4 @@
-import { DestroyRef, inject, Injectable } from '@angular/core';
+import {DestroyRef, inject, Injectable, OnInit} from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { BehaviorSubject, map, Observable, ReplaySubject, Subject } from 'rxjs';
 import { SpinnerService } from '../spinner/spinner.service';
@@ -9,8 +9,10 @@ import {
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { environment } from '../../../environments/environment';
 
-@Injectable({providedIn: 'root'})
-export class CompanyService {
+@Injectable(
+  // {providedIn: 'root'}
+)
+export class CompanyService implements OnInit {
   private readonly spinnerService = inject(SpinnerService);
   private readonly http = inject(HttpClient);
   private readonly destroyRef = inject(DestroyRef);
@@ -20,6 +22,9 @@ export class CompanyService {
   // <CompanyDataInterface>();
 
   constructor() {}
+
+  ngOnInit(): void {
+    console.log('companyservice init')    }
 
   getCompanyList(): Observable<CompanyDataInterface[]> {
     return this.http

@@ -1,7 +1,8 @@
-import { Component, inject, OnInit, Signal } from '@angular/core';
+import {Component, EventEmitter, inject, OnInit, Output, Signal} from '@angular/core';
 import { CompanyService } from '../company.service';
 import { Observable } from 'rxjs';
 import { CompanyDataInterface } from '../../../Shared/Company.interface';
+import {PanelService} from "../../panel/panel.service";
 
 @Component({
   selector: 'app-company-list',
@@ -9,21 +10,20 @@ import { CompanyDataInterface } from '../../../Shared/Company.interface';
   styleUrl: './company-list.component.css',
 })
 export class CompanyListComponent implements OnInit {
-  companyService = inject(CompanyService);
-  companyListObs$: Observable<CompanyDataInterface[]> =
-    this.companyService.getCompanyList();
-  companySelectedSubject$ = this.companyService.companySelected$;
+  panelService: PanelService = inject(PanelService);
+
+  @Output()
+  selectedCompanyEmitted : EventEmitter<CompanyDataInterface> =
+  new EventEmitter<CompanyDataInterface>();
+
+  companyListObs$: Observable<CompanyDataInterface[]> = this.panelService.getCompanyList();
 
   ngOnInit(): void {}
 
   handleGetCompanyEmployees(companyData: CompanyDataInterface) {
-    // if(!companyData) {
-    //   return
-    // }
-    console.log('click');
-    console.log(companyData);
-    if (companyData) {
-      this.companyService.companySelected$.next(companyData);
+    if(!companyData) {
+      return
     }
+    this.selectedCompanyEmitted.emit(companyData)
   }
 }

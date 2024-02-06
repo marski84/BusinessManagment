@@ -3,6 +3,7 @@ import {ActivatedRoute, Data} from "@angular/router";
 import {Observable, Subscription} from "rxjs";
 import {UserDataInterface} from "../../../Shared/UserData.interface";
 import { toSignal } from '@angular/core/rxjs-interop';
+import {CompanyDataInterface} from "../../../Shared/Company.interface";
 
 
 @Component({
@@ -17,6 +18,10 @@ export class PanelComponent implements OnInit {
 
 
   ngOnInit(): void {
+  }
+
+  handleCompanySelected(companyData: CompanyDataInterface) {
+    console.log(companyData)
   }
 
 
