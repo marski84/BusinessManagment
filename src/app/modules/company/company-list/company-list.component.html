@@ -5,7 +5,7 @@
         <div *ngFor="let companyData of companyList">
             <app-company-detail
               [companyData]="companyData"
-              (companyEmployeesEmitted)="handleGetCompanyEmployees($event)"
+              (companyEmployeesEmitted)="handleGetCompanyEmployees(companyData)"
             ></app-company-detail>
             <!-- // button  /company/id-->
         </div>

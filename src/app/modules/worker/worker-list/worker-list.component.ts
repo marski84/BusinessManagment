@@ -17,7 +17,7 @@ export class WorkerListComponent {
   private readonly workerService = inject(WorkerService);
   private readonly companyService = inject(CompanyService);
 
- companySelected$: Observable<ProcessedCompanyWorkersDataInterface> = this.companyService.companySelected$
+ companySelected$: Observable<WorkerData[]> = this.companyService.companySelected$
     .pipe(
       catchError(err => throwError(() => {
         console.log(err)
@@ -26,7 +26,7 @@ export class WorkerListComponent {
       tap(()=>console.log('company selected')),
       takeUntilDestroyed(this.destroyRef$),
       // filter((companyData) => companyData !== null),
-      switchMap((companyData) =>
+      switchMap((companyData) => //
         this.workerService.getWorkersList(companyData)
       ),
     )

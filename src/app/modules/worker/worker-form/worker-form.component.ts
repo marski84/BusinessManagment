@@ -22,7 +22,6 @@ export interface WorkerFormInterface {
   styleUrl: './worker-form.component.css'
 })
 export class WorkerFormComponent implements OnInit{
-  private readonly workerData: WorkerData;
   private readonly fb = inject(NonNullableFormBuilder);
   private readonly dialogRef = inject(MatDialogRef<WorkerFormComponent>);
 
@@ -32,23 +31,20 @@ export class WorkerFormComponent implements OnInit{
     lastName: this.fb.control('', Validators.required),
     education: this.fb.control(''),
     companyName: this.fb.control({value: '', disabled: true}, Validators.required)
-
   });
 
-  constructor(@Inject(MAT_DIALOG_DATA) private data: WorkerData) {
-    this.workerData = data;
+  constructor(@Inject(MAT_DIALOG_DATA) private data: WorkerData) {}
 
-  }
   ngOnInit(): void {
-    console.log(this.workerData)
-    if (this.workerData) {
-      this.workerForm.controls.firstName.setValue(this.workerData.name)
-      this.workerForm.controls.lastName.setValue(this.workerData.surname)
-      if (this.workerData.companyName) {
-        this.workerForm.controls.companyName.setValue(this.workerData.companyName)
+    console.log(this.data)
+    if (this.data) {
+      this.workerForm.controls.firstName.setValue(this.data.name)
+      this.workerForm.controls.lastName.setValue(this.data.surname)
+      if (this.data.companyName) {
+        this.workerForm.controls.companyName.setValue(this.data.companyName)
       }
-      if (this.workerData.education) {
-        this.workerForm.controls.education.setValue(this.workerData.education)
+      if (this.data.education) {
+        this.workerForm.controls.education.setValue(this.data.education)
       }
     }
 
@@ -60,8 +56,8 @@ export class WorkerFormComponent implements OnInit{
     }
 
     const result: WorkerData = {
-      _id: this.workerData._id,
-      companyId: this.workerData.companyId,
+      _id: this.data._id,
+      companyId: this.data.companyId,
       name: this.workerForm.controls.firstName.value,
       surname: this.workerForm.controls.lastName.value,
       companyName: this.workerForm.controls.companyName.getRawValue(),

@@ -5,7 +5,7 @@ import {BehaviorSubject} from "rxjs";
 export class SpinnerService {
 
   isLoading$ = new BehaviorSubject(false);
-  private amountOfCalls = 0;
+  private amountOfCalls = 0; // TODO: albo wywalić albo dopisać logikę
 
   constructor() {
   }

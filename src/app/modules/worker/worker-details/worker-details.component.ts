@@ -17,21 +17,17 @@ export class WorkerDetailsComponent {
   private readonly workerService = inject(WorkerService);
   private readonly dialog = inject(MatDialog);
   private readonly destoyRef = inject(DestroyRef);
-  private readonly dialogConfig: MatDialogConfig = {
-    disableClose: true,
-    hasBackdrop: true
-  }
 
   @Input()
   workerData!: WorkerData;
 
 
   handleEditWorkerData() {
-    this.dialogConfig.data = this.workerData;
     const dialogRef = this.dialog.open(WorkerFormComponent, {
-      ...this.dialogConfig
-    }
-    )
+      disableClose: true,
+      hasBackdrop: true,
+      data : this.workerData
+    })
 
     dialogRef.afterClosed()
       .pipe(
@@ -41,6 +37,7 @@ export class WorkerDetailsComponent {
       )
       .subscribe(data => console.log(data))
   }
+  //
 
 // {
 //   "_id": "6585b4fa41009f7f38bb2a4a",

@@ -1,29 +1,38 @@
-import {Component, DestroyRef, inject, OnInit} from '@angular/core';
+import { Component, DestroyRef, inject, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import {
   NavigationCancel,
   NavigationEnd,
   NavigationError,
-  NavigationStart, ResolveEnd, ResolveStart,
+  NavigationStart,
+  ResolveEnd,
+  ResolveStart,
   Router,
   RouterEvent,
-  RouterOutlet
+  RouterOutlet,
 } from '@angular/router';
-import {HttpClientModule} from "@angular/common/http";
-import {AuthModule} from "./modules/auth-module/auth.module";
-import {SpinnerService} from "./modules/spinner/spinner.service";
-import {SpinnerModule} from "./modules/spinner/spinner.module";
-import {tap} from "rxjs";
-import {takeUntilDestroyed} from "@angular/core/rxjs-interop";
-import {MaterialModule} from "./modules/material/material.module";
+import { AuthModule } from './modules/auth-module/auth.module';
+import { SpinnerService } from './modules/spinner/spinner.service';
+import { SpinnerModule } from './modules/spinner/spinner.module';
+import { tap } from 'rxjs';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { MaterialModule } from './modules/material/material.module';
+import { provideHttpClient, withInterceptors } from '@angular/common/http';
+import { authInterceptor } from './commons/AuthInterceptor/auth.interceptor';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [HttpClientModule, CommonModule, RouterOutlet, AuthModule, SpinnerModule, MaterialModule],
+  imports: [
+    CommonModule,
+    RouterOutlet,
+    AuthModule,
+    SpinnerModule,
+    MaterialModule,
+  ],
   providers: [],
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css']
+  styleUrls: ['./app.component.css'],
 })
 export class AppComponent implements OnInit {
   readonly router = inject(Router);
@@ -35,12 +44,10 @@ export class AppComponent implements OnInit {
     this.router.events
       .pipe(
         takeUntilDestroyed(this.destroyRef),
-        tap((event: any) => this.handleEvent(event)),
+        tap((event: any) => this.handleEvent(event))
       )
-      .subscribe()
+      .subscribe();
   }
-
-
 
   private handleEvent(event: RouterEvent) {
     if (event instanceof NavigationStart || event instanceof ResolveStart) {
@@ -57,6 +64,5 @@ export class AppComponent implements OnInit {
     if (event instanceof NavigationError) {
       this.spinnerService.hide();
     }
-
   }
 }

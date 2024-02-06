@@ -1,8 +1,13 @@
 export interface CompanyDataInterface {
-  _id: string,
-  name: string
+  _id: string;
+  name: string;
 }
 
 export interface CompanyResponseInterface {
-  data: CompanyDataInterface[]
+  data: CompanyDataInterface[];
 }
+
+type ApiReponse<T> = { // better that above :)
+  data: T;
+  message: string;
+};

@@ -18,7 +18,6 @@ import {authInterceptor} from "../../commons/AuthInterceptor/auth.interceptor";
   ],
   exports: [CompanyListComponent],
   providers: [
-    CompanyService,
     provideHttpClient(withInterceptors([authInterceptor]))
   ],
 })

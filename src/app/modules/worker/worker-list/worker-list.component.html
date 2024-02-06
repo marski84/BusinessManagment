@@ -1,21 +1,21 @@
 <ng-container class="company-list-container"
               *ngIf="
               {
-              companyData: companySelected$ | async,
+              companyEmployees: companySelected$ | async,
               error: companySelectedError$ | async
               } as data,
 "
 >
 
-  <ng-container *ngIf="data.companyData && data.companyData?.employees?.length">
-    <div *ngFor="let employee of data.companyData?.employees">
+  <ng-container *ngIf="data.companyEmployees && data.companyEmployees.length">
+    <div *ngFor="let employee of data.companyEmployees">
       <app-worker-details
         [workerData]="employee"
       ></app-worker-details>
     </div>
   </ng-container>
 
-  <ng-container *ngIf="data.companyData?.employees?.length === 0">
+  <ng-container *ngIf="data.companyEmployees?.length === 0">
     <h1>No employees registered!</h1>
   </ng-container>
 
