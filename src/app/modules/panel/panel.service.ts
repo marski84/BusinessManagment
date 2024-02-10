@@ -1,7 +1,7 @@
-import {DestroyRef, inject, Injectable} from '@angular/core';
+import {DestroyRef, inject, Injectable, signal} from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 import {environment} from "../../../environments/environment";
-import {catchError, map, Observable, of, tap, throwError} from "rxjs";
+import {catchError, finalize, map, Observable, of, switchMap, tap, throwError} from "rxjs";
 import {CompanyDataInterface, CompanyResponseInterface} from "../../Shared/Company.interface";
 import {takeUntilDestroyed} from "@angular/core/rxjs-interop";
 import {WorkerData} from "../../Shared/WorkerData.interface";
@@ -17,6 +17,9 @@ export class PanelService {
   private readonly baseApiUrl = environment.apiBaseUrl;
   private readonly companyListUrl = `${this.baseApiUrl}/companies`;
   private readonly workerApiBaseUrl = `${this.baseApiUrl}/workers`;
+  private selectedCompany: CompanyDataInterface | null = null;
+
+  workersList = signal<WorkerData[]>([]);
 
   constructor() {}
 
@@ -34,8 +37,6 @@ export class PanelService {
 
   getWorkersList(companyData: CompanyDataInterface): Observable<WorkerData[]> {
     const workersListUrl = `${this.companyListUrl}/${companyData._id}/workers`;
-    console.log('worker list');
-    console.log(companyData);
 
     return this.http.get<CompanyWorkersResponseInterface>(workersListUrl).pipe(
       takeUntilDestroyed(this.destroyRef),
@@ -51,7 +52,9 @@ export class PanelService {
         return employees
 
       }),
-      tap((data) => console.log(data))
+      tap(data => this.workersList.set(data)),
+      tap((data) => console.log(data)),
+      finalize(() => this.selectedCompany = companyData)
     );
   }
   updateWorkerData(workerUpdatedData: WorkerData) {
@@ -64,11 +67,11 @@ export class PanelService {
         surname: workerUpdatedData.surname,
         education: workerUpdatedData.education,
       })
-      .subscribe((success) => {
-        // this.companyService.companySelected$.next(<CompanyDataInterface>{
-        //   _id: workerUpdatedData.companyId,
-        //   name: workerUpdatedData.companyName,
-        // });
-      });
+      .pipe(
+        takeUntilDestroyed(this.destroyRef),
+        switchMap(data =>
+          this.getWorkersList(this.selectedCompany!))
+      )
+      .subscribe();
   }
 }

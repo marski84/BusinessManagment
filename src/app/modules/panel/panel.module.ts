@@ -9,7 +9,6 @@ import { CompanyModule } from '../company/company.module';
 import { WorkerModule } from '../worker/worker.module';
 import { RouterOutlet } from '@angular/router';
 import { PanelRoutingModule } from './panel-routing.module';
-import {CompanyService} from "../company/company.service";
 import {provideHttpClient, withInterceptors} from "@angular/common/http";
 import {authInterceptor} from "../../commons/AuthInterceptor/auth.interceptor";
 
@@ -29,7 +28,6 @@ import {authInterceptor} from "../../commons/AuthInterceptor/auth.interceptor";
     PanelRoutingModule,
   ],
   providers: [
-    CompanyService,
     provideHttpClient(withInterceptors([authInterceptor]))
   ],
   exports: [PanelHeaderComponent, PanelComponent],

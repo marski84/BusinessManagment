@@ -1,26 +1,16 @@
-<ng-container class="company-list-container"
-              *ngIf="
-              {
-              companyEmployees: companySelected$ | async,
-              error: companySelectedError$ | async
-              } as data,
-"
->
+<ng-container class="company-list-container" *ngIf="workersData">
 
-  <ng-container *ngIf="data.companyEmployees && data.companyEmployees.length">
-    <div *ngFor="let employee of data.companyEmployees">
+<!--   handle case when employees registerd -->
+    <div *ngFor="let employee of workersData">
       <app-worker-details
+        (editedWorkerDataEmitter)="handleEditWorkerData($event)"
         [workerData]="employee"
       ></app-worker-details>
     </div>
-  </ng-container>
 
-  <ng-container *ngIf="data.companyEmployees?.length === 0">
+<!--   handle case when no employees are registered -->
+  <ng-container *ngIf="workersData.length === 0">
     <h1>No employees registered!</h1>
-  </ng-container>
-
-  <ng-container *ngIf="data.error">
-    {{data.error | json}}
   </ng-container>
 
 </ng-container>

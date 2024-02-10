@@ -4,6 +4,8 @@ import {Observable, Subscription} from "rxjs";
 import {UserDataInterface} from "../../../Shared/UserData.interface";
 import { toSignal } from '@angular/core/rxjs-interop';
 import {CompanyDataInterface} from "../../../Shared/Company.interface";
+import {PanelService} from "../panel.service";
+import {WorkerData} from "../../../Shared/WorkerData.interface";
 
 
 @Component({
@@ -14,7 +16,10 @@ import {CompanyDataInterface} from "../../../Shared/Company.interface";
 export class PanelComponent implements OnInit {
   activatedRoute = inject(ActivatedRoute)
   userData: Observable<Data> = this.activatedRoute.data;
+  panelService = inject(PanelService);
   data = toSignal(this.userData);
+
+  workerDataObs$: Observable<any> | undefined;
 
 
   ngOnInit(): void {
@@ -22,6 +27,15 @@ export class PanelComponent implements OnInit {
 
   handleCompanySelected(companyData: CompanyDataInterface) {
     console.log(companyData)
+    if (!companyData) {
+      return
+    }
+    this.panelService.getWorkersList(companyData).subscribe();
+  }
+
+  handleWorkerEditedData(workerData: WorkerData) {
+    console.log(workerData)
+    this.panelService.updateWorkerData(workerData);
   }
 
 

@@ -1,5 +1,4 @@
 import {Component, EventEmitter, inject, OnInit, Output, Signal} from '@angular/core';
-import { CompanyService } from '../company.service';
 import { Observable } from 'rxjs';
 import { CompanyDataInterface } from '../../../Shared/Company.interface';
 import {PanelService} from "../../panel/panel.service";
@@ -24,6 +23,6 @@ export class CompanyListComponent implements OnInit {
     if(!companyData) {
       return
     }
-    this.selectedCompanyEmitted.emit(companyData)
+    this.selectedCompanyEmitted.emit(companyData);
   }
 }
