@@ -8,6 +8,9 @@ import {
 import {WorkerData} from "../../../Shared/WorkerData.interface";
 import {DialogRef} from "@angular/cdk/dialog";
 import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material/dialog";
+import {HttpClient} from "@angular/common/http";
+import {WorkerFormService} from "./worker-form.service";
+import {toSignal} from "@angular/core/rxjs-interop";
 
 export interface WorkerFormInterface {
   firstName: FormControl<string>,
@@ -24,6 +27,9 @@ export interface WorkerFormInterface {
 export class WorkerFormComponent implements OnInit{
   private readonly fb = inject(NonNullableFormBuilder);
   private readonly dialogRef = inject(MatDialogRef<WorkerFormComponent>);
+  private readonly formService = inject(WorkerFormService);
+  universitiesObs$ = toSignal(this.formService.getUniversities());
+
 
 
   workerForm: FormGroup<WorkerFormInterface> = this.fb.group({

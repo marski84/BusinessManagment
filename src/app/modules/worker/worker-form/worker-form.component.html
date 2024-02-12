@@ -2,7 +2,7 @@
 
 <mat-dialog-content [formGroup]="workerForm">
   <form >
-    <div class="info">
+    <div class="info"  *ngIf="universitiesObs$() as universities">
 
       <label for="name">First name</label>
       <input
@@ -21,13 +21,27 @@
         name="name"
         placeholder="Surname">
 
-      <label for="education">Education</label>
-      <input
-        id="education"
-        [formControl]="workerForm.controls.education"
-        type="text"
-        name="name"
-        placeholder="Education">
+
+        <label for="education">Education</label>
+        <select
+          [formControl]="workerForm.controls.education"
+          name="education"
+          id="education"
+        >
+          <option  *ngFor="let universityName of universities"
+            value="{{universityName}}"
+          >
+            {{universityName}}
+          </option>
+        </select>
+
+
+<!--       <input -->
+<!--         id="education" -->
+<!--         [formControl]="workerForm.controls.education" -->
+<!--         type="text" -->
+<!--         name="name" -->
+<!--         placeholder="Education"> -->
 
 
       <label for="company">Company</label>
