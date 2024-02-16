@@ -19,7 +19,11 @@ export class WorkerDetailsComponent {
   workerData!: WorkerData;
 
   @Output()
-  editedWorkerDataEmitter: EventEmitter<WorkerData> = new EventEmitter();
+  editedWorkerDataEmitted: EventEmitter<WorkerData> = new EventEmitter();
+  @Output()
+  workerNotificationEmitted: EventEmitter<WorkerData> = new EventEmitter();
+  @Output()
+  deleteWorkerDataRequestEmitted: EventEmitter<WorkerData> = new EventEmitter();
 
 
   handleEditWorkerData() {
@@ -33,9 +37,24 @@ export class WorkerDetailsComponent {
       .pipe(
         takeUntilDestroyed(this.destroyRef),
         filter((data) => data),
-        tap(data => this.editedWorkerDataEmitter.emit(data))
+        tap(data => this.editedWorkerDataEmitted.emit(data))
       )
       .subscribe(data => console.log(data))
   };
+
+  handleNotifyWorker() {
+    if (!this.workerData) {
+      return;
+    }
+    this.workerNotificationEmitted.emit(this.workerData);
+  }
+
+  handleDeleteWorkerData() {
+    if (!this.workerData) {
+      return;
+    }
+
+    this.deleteWorkerDataRequestEmitted.emit(this.workerData);
+  }
 
 }

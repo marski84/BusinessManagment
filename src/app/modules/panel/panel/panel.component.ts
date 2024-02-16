@@ -38,5 +38,12 @@ export class PanelComponent implements OnInit {
     this.panelService.updateWorkerData(workerData);
   }
 
+  handleWorkerNotification(workerData: WorkerData) {
+    if (!workerData) {
+      return;
+    }
+    this.panelService.notifyWorker(workerData)
+  }
+
 
 }

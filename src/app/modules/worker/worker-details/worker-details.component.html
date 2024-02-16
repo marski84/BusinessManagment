@@ -3,13 +3,27 @@
     <mat-card-header>
       <mat-card-title>Personal data: {{workerData.name}} {{workerData.surname}}</mat-card-title>
       <mat-card-subtitle>
-        Company: {{workerData.companyName}}
-        Education: {{workerData.education ? workerData.education : 'No data available'}}
+        <div>
+          Company: {{workerData.companyName}}
+        </div>
+        <div>
+          Education: {{workerData.education ? workerData.education : 'No data available'}}
+        </div>
       </mat-card-subtitle>
     </mat-card-header>
 
     <mat-card-actions>
-      <button mat-button (click)="handleEditWorkerData()">Edit employee data</button>
+      <div>
+        <button mat-button (click)="handleEditWorkerData()">Edit employee data</button>
+      </div>
+
+      <div>
+        <button mat-button (click)="handleNotifyWorker()">Notify worker</button>
+      </div>
+
+      <div>
+        <button mat-button (click)="handleDeleteWorkerData()">Delete worker data</button>
+      </div>
     </mat-card-actions>
   </mat-card>
 

@@ -6,6 +6,7 @@ import {HttpClientModule} from "@angular/common/http";
 import {WorkerDetailsComponent} from "./worker-details/worker-details.component";
 import {MaterialModule} from "../material/material.module";
 import {ReactiveFormsModule} from "@angular/forms";
+import {SpinnerModule} from "../spinner/spinner.module";
 
 
 
@@ -20,6 +21,7 @@ import {ReactiveFormsModule} from "@angular/forms";
     HttpClientModule,
     MaterialModule,
     ReactiveFormsModule,
+    SpinnerModule,
 
   ],
   exports: [

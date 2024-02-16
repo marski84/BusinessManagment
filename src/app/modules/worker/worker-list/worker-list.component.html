@@ -3,7 +3,8 @@
 <!--   handle case when employees registerd -->
     <div *ngFor="let employee of workersData">
       <app-worker-details
-        (editedWorkerDataEmitter)="handleEditWorkerData($event)"
+        (editedWorkerDataEmitted)="handleEditWorkerData($event)"
+        (workerNotificationEmitted)="handleWorkerNotification($event)"
         [workerData]="employee"
       ></app-worker-details>
     </div>

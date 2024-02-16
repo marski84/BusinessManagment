@@ -14,11 +14,21 @@ export class WorkerListComponent {
 
   @Output()
   editedWorkerDataEmitted = new EventEmitter<WorkerData>();
+  @Output()
+  workerNotificationEmitted = new EventEmitter<WorkerData>();
   handleEditWorkerData(workerData: WorkerData) {
     if (!workerData) {
       return;
     }
     this.editedWorkerDataEmitted.emit(workerData);
+  }
+
+  handleWorkerNotification(workerData: WorkerData) {
+    console.log('workerlist')
+    if (!workerData) {
+      return;
+    }
+    this.workerNotificationEmitted.emit(workerData);
   }
 
 }

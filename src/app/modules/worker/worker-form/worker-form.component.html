@@ -1,25 +1,32 @@
-<h1 mat-dialog-title>Employee personal data</h1>
+<app-spinner></app-spinner>
 
-<mat-dialog-content [formGroup]="workerForm">
-  <form >
-    <div class="info"  *ngIf="universitiesObs$() as universities">
+<ng-container  *ngIf="universitiesObs$() as universities">
+  <h1 mat-dialog-title>Employee personal data</h1>
 
-      <label for="name">First name</label>
-      <input
-        [formControl]="workerForm.controls.firstName"
-        id="name"
-        class="fname"
-        type="text"
-        name="name"
-        placeholder="Name">
+<!--   <ng-template #loading> -->
+<!--     <h1>Loading...</h1> -->
+<!--   </ng-template> -->
 
-      <label for="lastName">Last name</label>
-      <input
-        [formControl]="workerForm.controls.lastName"
-        id="lastName"
-        type="text"
-        name="name"
-        placeholder="Surname">
+  <mat-dialog-content [formGroup]="workerForm">
+    <form >
+      <div class="info" >
+
+        <label for="name">First name</label>
+        <input
+          [formControl]="workerForm.controls.firstName"
+          id="name"
+          class="fname"
+          type="text"
+          name="name"
+          placeholder="Name">
+
+        <label for="lastName">Last name</label>
+        <input
+          [formControl]="workerForm.controls.lastName"
+          id="lastName"
+          type="text"
+          name="name"
+          placeholder="Surname">
 
 
         <label for="education">Education</label>
@@ -29,35 +36,38 @@
           id="education"
         >
           <option  *ngFor="let universityName of universities"
-            value="{{universityName}}"
+                   value="{{universityName}}"
           >
             {{universityName}}
           </option>
         </select>
 
 
-<!--       <input -->
-<!--         id="education" -->
-<!--         [formControl]="workerForm.controls.education" -->
-<!--         type="text" -->
-<!--         name="name" -->
-<!--         placeholder="Education"> -->
+        <!--       <input -->
+        <!--         id="education" -->
+        <!--         [formControl]="workerForm.controls.education" -->
+        <!--         type="text" -->
+        <!--         name="name" -->
+        <!--         placeholder="Education"> -->
 
 
-      <label for="company">Company</label>
-      <input
-        id="company"
-        [formControl]="workerForm.controls.companyName"
-        type="text"
-        name="name"
-        placeholder="Company Name">
-    </div>
+        <label for="company">Company</label>
+        <input
+          id="company"
+          [formControl]="workerForm.controls.companyName"
+          type="text"
+          name="name"
+          placeholder="Company Name">
+      </div>
 
-  </form>
-</mat-dialog-content>
+    </form>
+  </mat-dialog-content>
 
-<mat-dialog-actions>
-  <button (click)="handleDataEdit()">Edit</button>
-  <button (click)="handleCancel()">Cancel</button>
-</mat-dialog-actions>
+  <mat-dialog-actions>
+    <button (click)="handleDataEdit()">Edit</button>
+    <button (click)="handleCancel()">Cancel</button>
+  </mat-dialog-actions>
 
+
+
+</ng-container>

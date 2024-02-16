@@ -6,13 +6,11 @@ import {SpinnerService} from "../../modules/spinner/spinner.service";
 
 
 export const authInterceptor: HttpInterceptorFn = (req, next) => {
-  console.log('interceptor!' + req.url)
 
   const storeService = inject(StoreService);
   const spinnerService = inject(SpinnerService);
 
   if (storeService.jwtToken) {
-    console.log(storeService.jwtToken)
     req = req.clone({
       setHeaders: {
         Authorization: `Bearer ${storeService.jwtToken}`
@@ -28,15 +26,11 @@ export const authInterceptor: HttpInterceptorFn = (req, next) => {
       retry(3),
       catchError((err: HttpErrorResponse) => {
         spinnerService.hide()
+        if (err.status !== 200) {
+          alert('Http error occured')
+        }
         return throwError(() => err);
       }),
-      catchError((err: HttpErrorResponse) => {
-        if (err.status !== 200) {
-        alert('Http error occured')
-      }
-        console.log('error throw')
-        return throwError(() => of((err)));
-    }),
       finalize(() => {
             spinnerService.hide()
       })

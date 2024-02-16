@@ -12,6 +12,7 @@
       *ngIf="panelService.workersList() as workerData"
       [workersData]="workerData"
       (editedWorkerDataEmitted)="handleWorkerEditedData($event)"
+      (workerNotificationEmitted)="handleWorkerNotification($event)"
     ></app-worker-list>
   </mat-sidenav-content>
 </mat-sidenav-container>

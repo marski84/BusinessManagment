@@ -1,12 +1,14 @@
-<div>
+<div *ngIf="companyListObs$ | async as companyList">
     <app-spinner></app-spinner>
 
-    <ng-container *ngIf="companyListObs$ | async as companyList">
+    <ng-container>
         <div *ngFor="let companyData of companyList">
             <app-company-detail
               [companyData]="companyData"
               (companyEmployeesEmitted)="handleGetCompanyEmployees(companyData)"
             ></app-company-detail>
         </div>
+
+
     </ng-container>
 </div>

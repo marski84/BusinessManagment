@@ -17,6 +17,7 @@ export class PanelService {
   private readonly baseApiUrl = environment.apiBaseUrl;
   private readonly companyListUrl = `${this.baseApiUrl}/companies`;
   private readonly workerApiBaseUrl = `${this.baseApiUrl}/workers`;
+
   private selectedCompany: CompanyDataInterface | null = null;
 
   workersList = signal<WorkerData[]>([]);
@@ -73,5 +74,16 @@ export class PanelService {
           this.getWorkersList(this.selectedCompany!))
       )
       .subscribe();
+  }
+
+
+  // 400, "Worker needs univeristy information"
+  notifyWorker(worker: WorkerData) {
+    return this.http.get<any>(`${this.workerApiBaseUrl}/${worker._id}/notify`)
+      .pipe(
+        takeUntilDestroyed(this.destroyRef),
+        tap((data) => console.log(data))
+      )
+      .subscribe()
   }
 }
