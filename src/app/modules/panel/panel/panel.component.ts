@@ -1,11 +1,13 @@
 import {Component, inject, OnInit} from '@angular/core';
 import {ActivatedRoute, Data} from "@angular/router";
-import {Observable, Subscription} from "rxjs";
+import {filter, finalize, Observable, Subscription, tap} from "rxjs";
 import {UserDataInterface} from "../../../Shared/UserData.interface";
-import { toSignal } from '@angular/core/rxjs-interop';
+import {takeUntilDestroyed, toSignal} from '@angular/core/rxjs-interop';
 import {CompanyDataInterface} from "../../../Shared/Company.interface";
 import {PanelService} from "../panel.service";
 import {WorkerData} from "../../../Shared/WorkerData.interface";
+import {MatDialog} from "@angular/material/dialog";
+import {WorkerFormComponent} from "../../worker/worker-form/worker-form.component";
 
 
 @Component({
@@ -18,15 +20,16 @@ export class PanelComponent implements OnInit {
   userData: Observable<Data> = this.activatedRoute.data;
   panelService = inject(PanelService);
   data = toSignal(this.userData);
+  private readonly dialog = inject(MatDialog);
 
-  workerDataObs$: Observable<any> | undefined;
 
+  constructor() {
+  }
 
   ngOnInit(): void {
   }
 
   handleCompanySelected(companyData: CompanyDataInterface) {
-    console.log(companyData)
     if (!companyData) {
       return
     }
@@ -34,7 +37,9 @@ export class PanelComponent implements OnInit {
   }
 
   handleWorkerEditedData(workerData: WorkerData) {
-    console.log(workerData)
+    if (!workerData) {
+      return;
+    }
     this.panelService.updateWorkerData(workerData);
   }
 
@@ -42,8 +47,35 @@ export class PanelComponent implements OnInit {
     if (!workerData) {
       return;
     }
-    this.panelService.notifyWorker(workerData)
+    // handle situation when worker has no university data
+    if (workerData.university === '') {
+      this.handleWorkerDataSupplement(workerData);
+      return;
+    }
+    // handle
+    this.panelService.notifyWorker(workerData);
   }
+
+  private handleWorkerDataSupplement(workerData: WorkerData) {
+    const dialogRef = this.dialog.open(WorkerFormComponent, {
+      disableClose: true,
+      hasBackdrop: true,
+      data : {
+        formData: workerData,
+        editAllMode: false
+      }
+    });
+
+    dialogRef.afterClosed()
+      .pipe(
+        tap(editedWorkerData => this.panelService.updateWorkerData(editedWorkerData)),
+        finalize(() => this.panelService.notifyWorker(workerData))
+      )
+      .subscribe()
+  }
+
+
+
 
 
 }

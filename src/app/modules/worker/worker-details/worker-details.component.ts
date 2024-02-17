@@ -26,11 +26,16 @@ export class WorkerDetailsComponent {
   deleteWorkerDataRequestEmitted: EventEmitter<WorkerData> = new EventEmitter();
 
 
+
+
   handleEditWorkerData() {
     const dialogRef = this.dialog.open(WorkerFormComponent, {
       disableClose: true,
       hasBackdrop: true,
-      data : this.workerData
+      data : {
+        formData: this.workerData,
+        editAllMode: true
+      }
     });
 
     dialogRef.afterClosed()

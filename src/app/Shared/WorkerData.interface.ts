@@ -4,5 +4,5 @@ export interface WorkerData {
   _id: string,
   name: string,
   surname: string,
-  education?: string
+  university?: string
 }

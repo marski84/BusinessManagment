@@ -1,7 +1,7 @@
-import {DestroyRef, inject, Injectable, signal} from '@angular/core';
+import {DestroyRef, inject, Injectable, OnInit, signal} from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 import {environment} from "../../../environments/environment";
-import {catchError, finalize, map, Observable, of, switchMap, tap, throwError} from "rxjs";
+import {catchError, filter, finalize, map, Observable, of, Subject, switchMap, tap, throwError} from "rxjs";
 import {CompanyDataInterface, CompanyResponseInterface} from "../../Shared/Company.interface";
 import {takeUntilDestroyed} from "@angular/core/rxjs-interop";
 import {WorkerData} from "../../Shared/WorkerData.interface";
@@ -17,14 +17,12 @@ export class PanelService {
   private readonly baseApiUrl = environment.apiBaseUrl;
   private readonly companyListUrl = `${this.baseApiUrl}/companies`;
   private readonly workerApiBaseUrl = `${this.baseApiUrl}/workers`;
-
   private selectedCompany: CompanyDataInterface | null = null;
 
   workersList = signal<WorkerData[]>([]);
 
   constructor() {}
 
-  ngOnInit(): void {}
 
   getCompanyList(): Observable<CompanyDataInterface[]> {
     return this.http
@@ -59,30 +57,36 @@ export class PanelService {
     );
   }
   updateWorkerData(workerUpdatedData: WorkerData) {
-    console.log(workerUpdatedData);
     return this.http
-      .put(`${this.workerApiBaseUrl}/${workerUpdatedData._id}`, {
+      .put<
+        {
+          message: string,
+          data: WorkerData,
+        }
+        >(`${this.workerApiBaseUrl}/${workerUpdatedData._id}`, {
         _id: workerUpdatedData._id,
         companyId: workerUpdatedData.companyId,
         name: workerUpdatedData.name,
         surname: workerUpdatedData.surname,
-        education: workerUpdatedData.education,
+        university: workerUpdatedData.university,
       })
       .pipe(
         takeUntilDestroyed(this.destroyRef),
-        switchMap(data =>
-          this.getWorkersList(this.selectedCompany!))
+        switchMap((resp ) => {
+            console.log(resp)
+            this.notifyWorker(workerUpdatedData);
+
+          return this.getWorkersList(this.selectedCompany!)
+        })
       )
       .subscribe();
   }
 
 
-  // 400, "Worker needs univeristy information"
   notifyWorker(worker: WorkerData) {
     return this.http.get<any>(`${this.workerApiBaseUrl}/${worker._id}/notify`)
       .pipe(
         takeUntilDestroyed(this.destroyRef),
-        tap((data) => console.log(data))
       )
       .subscribe()
   }

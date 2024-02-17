@@ -1,11 +1,6 @@
-<app-spinner></app-spinner>
 
 <ng-container  *ngIf="universitiesObs$() as universities">
   <h1 mat-dialog-title>Employee personal data</h1>
-
-<!--   <ng-template #loading> -->
-<!--     <h1>Loading...</h1> -->
-<!--   </ng-template> -->
 
   <mat-dialog-content [formGroup]="workerForm">
     <form >
@@ -31,7 +26,7 @@
 
         <label for="education">Education</label>
         <select
-          [formControl]="workerForm.controls.education"
+          [formControl]="workerForm.controls.university"
           name="education"
           id="education"
         >
