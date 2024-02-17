@@ -44,7 +44,7 @@ export class WorkerDetailsComponent {
         filter((data) => data),
         tap(data => this.editedWorkerDataEmitted.emit(data))
       )
-      .subscribe(data => console.log(data))
+      .subscribe()
   };
 
   handleNotifyWorker() {

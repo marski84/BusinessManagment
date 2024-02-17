@@ -8,7 +8,6 @@ export const isLoggedGuard: CanActivateFn = () => {
   const storeService = inject(StoreService);
   const router = inject(Router)
 
-  console.log('canActivate guard')
   if (storeService.jwtToken) {
     return of(true)
   }

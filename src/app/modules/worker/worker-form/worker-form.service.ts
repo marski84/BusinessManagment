@@ -1,7 +1,6 @@
 import {inject, Injectable} from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 import {map, retry, tap} from "rxjs";
-import {PanelService} from "../../panel/panel.service";
 
 interface UniversityInterface {
   name: string;
@@ -28,6 +27,5 @@ export class WorkerFormService {
 
 
   constructor() {
-    console.log('worker service created')
   }
 }

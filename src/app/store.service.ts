@@ -64,20 +64,11 @@ export class StoreService {
       })
       .pipe(
         takeUntilDestroyed(this.destroyRef$),
-        tap(() => this.spinnerService.show()),
-        retry(3),
-        catchError((err: HttpErrorResponse) => {
-          this.spinnerService.hide();
-          return throwError(err);
-        }),
         tap((data) => (this.userData = data)),
-        tap(() => console.log(this.userData)),
-        finalize(() => this.spinnerService.hide())
       );
   }
 
   logOutUser() {
-    console.log('logout called');
     this.jwtToken = '';
     this.userData = null;
     this.router.navigate(['../']);

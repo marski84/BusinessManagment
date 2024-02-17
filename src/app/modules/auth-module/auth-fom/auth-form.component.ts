@@ -20,7 +20,6 @@ export class AuthFormComponent {
     if (!this.userDataForm.valid) {
       return;
     }
-    console.log(this.userDataForm.getRawValue())
     this.onSubmitEmitted.emit(this.userDataForm.getRawValue());
   }
 

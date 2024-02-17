@@ -1,4 +1,4 @@
-<ng-container class="company-list-container" *ngIf="workersData">
+<ng-container class="company-list-container" *ngIf="workersData && companySelected">
 
 <!--   handle case when employees registerd -->
     <div *ngFor="let employee of workersData">
@@ -14,4 +14,8 @@
     <h1>No employees registered!</h1>
   </ng-container>
 
+</ng-container>
+
+<ng-container *ngIf="!companySelected">
+  <h1>Please select company to view employees</h1>
 </ng-container>

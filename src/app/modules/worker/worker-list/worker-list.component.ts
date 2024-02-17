@@ -1,5 +1,15 @@
-import {ChangeDetectionStrategy, Component, EventEmitter, Input, Output} from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  EventEmitter,
+  Input,
+  OnChanges,
+  OnInit,
+  Output,
+  SimpleChanges
+} from '@angular/core';
 import {WorkerData} from "../../../Shared/WorkerData.interface";
+
 
 
 @Component({
@@ -8,7 +18,7 @@ import {WorkerData} from "../../../Shared/WorkerData.interface";
   styleUrl: './worker-list.component.css',
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class WorkerListComponent {
+export class WorkerListComponent implements OnInit, OnChanges {
   @Input()
   workersData!: WorkerData[];
 
@@ -16,6 +26,18 @@ export class WorkerListComponent {
   editedWorkerDataEmitted = new EventEmitter<WorkerData>();
   @Output()
   workerNotificationEmitted = new EventEmitter<WorkerData>();
+
+  companySelected = false;
+
+
+  ngOnInit(): void {
+  }
+
+  ngOnChanges(changes: SimpleChanges): void {
+    if (!changes['workersData'].firstChange ) {
+      this.companySelected = true;
+    }
+  }
   handleEditWorkerData(workerData: WorkerData) {
     if (!workerData) {
       return;
@@ -24,11 +46,14 @@ export class WorkerListComponent {
   }
 
   handleWorkerNotification(workerData: WorkerData) {
-    console.log('workerlist')
     if (!workerData) {
       return;
     }
     this.workerNotificationEmitted.emit(workerData);
   }
+
+
+
+
 
 }

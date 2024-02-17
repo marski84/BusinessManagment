@@ -17,7 +17,6 @@ export class LoginServiceRepository {
   private readonly singUpUrl: string = `${this.baseUrl}/auth/signUp`;
 
   constructor() {
-    console.log(this.baseUrl)
   }
   signIn(data: FormDataInterface): Observable<AuthResponseInterface> {
     return this.httpClient.post<AuthResponseInterface>(this.signInUrl, data)

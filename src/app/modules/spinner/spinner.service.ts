@@ -5,32 +5,16 @@ import {BehaviorSubject} from "rxjs";
 export class SpinnerService {
 
   isLoading$ = new BehaviorSubject(false);
-  private amountOfCalls = 0; // TODO: albo wywalić albo dopisać logikę
 
   constructor() {
   }
 
   show() {
-    this.amountOfCalls++;
     this.isLoading$.next(true)
   }
 
   hide() {
     this.isLoading$.next(false)
-    this.amountOfCalls--;
-
-        // if (this.amountOfCalls < 0) {
-        //   this.amountOfCalls = 0;
-        //   this.isLoading$.next(false)
-        //
-        // }
-        // console.log(this.amountOfCalls)
-        //
-        // if (this.amountOfCalls === 0) {
-        //   this.isLoading$.next(false)
-        // }
-
-
   }
 
 }

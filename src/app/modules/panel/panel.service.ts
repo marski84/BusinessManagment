@@ -40,7 +40,6 @@ export class PanelService {
     return this.http.get<CompanyWorkersResponseInterface>(workersListUrl).pipe(
       takeUntilDestroyed(this.destroyRef),
       catchError((err) => {
-        console.log(err);
         return throwError(() => of(err));
       }),
       map((data) => {
@@ -52,7 +51,6 @@ export class PanelService {
 
       }),
       tap(data => this.workersList.set(data)),
-      tap((data) => console.log(data)),
       finalize(() => this.selectedCompany = companyData)
     );
   }
@@ -73,7 +71,6 @@ export class PanelService {
       .pipe(
         takeUntilDestroyed(this.destroyRef),
         switchMap((resp ) => {
-            console.log(resp)
             this.notifyWorker(workerUpdatedData);
 
           return this.getWorkersList(this.selectedCompany!)
