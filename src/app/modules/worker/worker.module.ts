@@ -7,6 +7,8 @@ import {WorkerDetailsComponent} from "./worker-details/worker-details.component"
 import {MaterialModule} from "../material/material.module";
 import {ReactiveFormsModule} from "@angular/forms";
 import {SpinnerModule} from "../spinner/spinner.module";
+import {RegisterWorkerDirective} from "./register-worker.directive";
+import {DeleteWorkerDirective} from "./delete-worker.directive";
 
 
 
@@ -14,7 +16,9 @@ import {SpinnerModule} from "../spinner/spinner.module";
   declarations: [
     WorkerListComponent,
     WorkerFormComponent,
-    WorkerDetailsComponent
+    WorkerDetailsComponent,
+    RegisterWorkerDirective,
+    DeleteWorkerDirective
   ],
   imports: [
     CommonModule,

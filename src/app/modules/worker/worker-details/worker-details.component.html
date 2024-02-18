@@ -25,7 +25,12 @@
       </div>
 
       <div>
-        <button mat-button (click)="handleDeleteWorkerData()">Delete worker data</button>
+        <button
+          mat-button
+          (click)="handleDeleteWorkerData()"
+          appDeleteWorker
+          [workerId]="workerData._id"
+        >Delete worker data</button>
       </div>
     </mat-card-actions>
   </mat-card>

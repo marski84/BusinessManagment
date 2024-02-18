@@ -1,6 +1,6 @@
 import {inject, Injectable} from '@angular/core';
 import {HttpClient} from "@angular/common/http";
-import {map, retry, tap} from "rxjs";
+import {map, retry} from "rxjs";
 
 interface UniversityInterface {
   name: string;

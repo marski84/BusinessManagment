@@ -6,6 +6,7 @@ import {CompanyDataInterface, CompanyResponseInterface} from "../../Shared/Compa
 import {takeUntilDestroyed} from "@angular/core/rxjs-interop";
 import {WorkerData} from "../../Shared/WorkerData.interface";
 import {CompanyWorkersResponseInterface} from "../../Shared/CompanyWorkers.interface";
+import {NewWorkerData} from "../worker/register-worker.directive";
 
 @Injectable({
   providedIn: 'root'
@@ -18,6 +19,13 @@ export class PanelService {
   private readonly companyListUrl = `${this.baseApiUrl}/companies`;
   private readonly workerApiBaseUrl = `${this.baseApiUrl}/workers`;
   private selectedCompany: CompanyDataInterface | null = null;
+
+  get selectedCompanyId() {
+    if (!this.selectedCompany) {
+      return
+    }
+    return this.selectedCompany?._id
+  }
 
   workersList = signal<WorkerData[]>([]);
 
@@ -54,6 +62,31 @@ export class PanelService {
       finalize(() => this.selectedCompany = companyData)
     );
   }
+
+  createWorker(workerData: NewWorkerData) {
+    return this.http
+      .post<WorkerData>(`${this.workerApiBaseUrl}`,
+        workerData)
+      .pipe(
+        takeUntilDestroyed(this.destroyRef),
+        switchMap((resp ) => {
+          return this.getWorkersList(this.selectedCompany!)
+        })
+      )
+      .subscribe();
+  }
+
+  deleteWorker(workerId: string) {
+    return this.http
+      .delete<WorkerData>(`${this.workerApiBaseUrl}/${workerId}`)
+      .pipe(
+        takeUntilDestroyed(this.destroyRef),
+        switchMap((resp ) => {
+          return this.getWorkersList(this.selectedCompany!)
+        })
+      )
+      .subscribe();
+  }
   updateWorkerData(workerUpdatedData: WorkerData) {
     return this.http
       .put<
@@ -71,8 +104,9 @@ export class PanelService {
       .pipe(
         takeUntilDestroyed(this.destroyRef),
         switchMap((resp ) => {
+          if(workerUpdatedData.university !== '') {
             this.notifyWorker(workerUpdatedData);
-
+          }
           return this.getWorkersList(this.selectedCompany!)
         })
       )

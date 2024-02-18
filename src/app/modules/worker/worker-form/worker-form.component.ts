@@ -47,6 +47,7 @@ export class WorkerFormComponent implements OnInit{
   constructor(@Inject(MAT_DIALOG_DATA) private data: WorkerDialogInterface) {}
 
   ngOnInit(): void {
+    console.log(this.data)
     if (this.data.formData) {
       this.workerForm.controls.firstName.setValue(this.data.formData.name)
       this.workerForm.controls.lastName.setValue(this.data.formData.surname)
@@ -70,6 +71,16 @@ export class WorkerFormComponent implements OnInit{
       return
     }
 
+    // implement new worker data
+    // {
+    //   "name": "Paul",
+    //   "surname": "Badman",
+    //   "companyId": "{{company}}",
+    //   "university": "Uniwersytet Jagielloński"
+    // }
+    if (!this.data.formData) {
+
+    }
     const result: WorkerData = {
       _id: this.data.formData._id,
       companyId: this.data.formData.companyId,
