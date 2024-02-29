@@ -22,12 +22,14 @@ export class WorkerListComponent implements OnInit, OnChanges {
   @Input()
   workersData!: WorkerData[];
 
+  @Input() companySelected = false
+
   @Output()
   editedWorkerDataEmitted = new EventEmitter<WorkerData>();
   @Output()
   workerNotificationEmitted = new EventEmitter<WorkerData>();
 
-  companySelected = false;
+  // companySelected = false; // @Input
 
 
   ngOnInit(): void {
@@ -38,6 +40,7 @@ export class WorkerListComponent implements OnInit, OnChanges {
       this.companySelected = true;
     }
   }
+
   handleEditWorkerData(workerData: WorkerData) {
     if (!workerData) {
       return;

@@ -21,6 +21,7 @@ export class PanelComponent implements OnInit {
   panelService = inject(PanelService);
   data = toSignal(this.userData);
   private readonly dialog = inject(MatDialog);
+  companySelected = false;
 
 
   constructor() {
@@ -29,18 +30,22 @@ export class PanelComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  handleCompanySelected(companyData: CompanyDataInterface) {
+  handleGetSelectedCompanyWorkers(companyData: CompanyDataInterface) {
     if (!companyData) {
       return
     }
-    this.panelService.getWorkersList(companyData).subscribe();
+    this.panelService.getWorkersList(companyData)
+      .pipe(
+        tap(() => this.companySelected = true)
+  )
+      .subscribe();
   }
 
   handleWorkerEditedData(workerData: WorkerData) {
     if (!workerData) {
       return;
     }
-    this.panelService.updateWorkerData(workerData);
+    this.panelService.updateWorkerData(workerData).subscribe();
   }
 
   handleWorkerNotification(workerData: WorkerData) {
@@ -68,6 +73,8 @@ export class PanelComponent implements OnInit {
 
     dialogRef.afterClosed()
       .pipe(
+        // filter((res) => Boolean(res)),
+        filter(Boolean),
         tap(editedWorkerData => this.panelService.updateWorkerData(editedWorkerData)),
         finalize(() => this.panelService.notifyWorker(workerData))
       )

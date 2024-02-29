@@ -9,7 +9,7 @@ interface UniversityInterface {
 @Injectable({
   providedIn: 'root'
 })
-export class WorkerFormService {
+export class UniversitiesService {
   private readonly http = inject(HttpClient);
   private readonly universityUrl = 'http://universities.hipolabs.com/search?country=Poland';
 

@@ -12,7 +12,7 @@ export class CompanyListComponent implements OnInit {
   panelService: PanelService = inject(PanelService);
 
   @Output()
-  selectedCompanyEmitted : EventEmitter<CompanyDataInterface> =
+  getCompanyWorkersEmitted : EventEmitter<CompanyDataInterface> =
   new EventEmitter<CompanyDataInterface>();
 
   companyListObs$: Observable<CompanyDataInterface[]> = this.panelService.getCompanyList();
@@ -23,6 +23,6 @@ export class CompanyListComponent implements OnInit {
     if(!companyData) {
       return
     }
-    this.selectedCompanyEmitted.emit(companyData);
+    this.getCompanyWorkersEmitted.emit(companyData);
   }
 }

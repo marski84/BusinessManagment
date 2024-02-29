@@ -19,13 +19,15 @@ export class CompanyDetailComponent {
   companyData!: CompanyDataInterface;
 
   @Output()
-  companyEmployeesEmitted: EventEmitter<CompanyDataInterface> =
+  showEmployeesClicked: EventEmitter<CompanyDataInterface> =
     new EventEmitter<CompanyDataInterface>();
+  // showEmployeesClicked
+  // (showEmployeesClicked)=>"console.log($event)"
 
   getCompanyEmployees(companyData: CompanyDataInterface) {
     if (!companyData) {
       return;
     }
-    this.companyEmployeesEmitted.emit(companyData);
+    this.showEmployeesClicked.emit(companyData);
   }
 }

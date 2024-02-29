@@ -59,7 +59,9 @@ export class PanelService {
 
       }),
       tap(data => this.workersList.set(data)),
-      finalize(() => this.selectedCompany = companyData)
+      finalize(() => {
+        this.selectedCompany = companyData
+      })
     );
   }
 
@@ -69,9 +71,7 @@ export class PanelService {
         workerData)
       .pipe(
         takeUntilDestroyed(this.destroyRef),
-        switchMap((resp ) => {
-          return this.getWorkersList(this.selectedCompany!)
-        })
+        switchMap((resp ) => this.getWorkersList(this.selectedCompany!))
       )
       .subscribe();
   }
@@ -87,6 +87,7 @@ export class PanelService {
       )
       .subscribe();
   }
+
   updateWorkerData(workerUpdatedData: WorkerData) {
     return this.http
       .put<
@@ -103,14 +104,15 @@ export class PanelService {
       })
       .pipe(
         takeUntilDestroyed(this.destroyRef),
-        switchMap((resp ) => {
-          if(workerUpdatedData.university !== '') {
+        tap((res) => {
+          if(res.data.university !== '') {
+
             this.notifyWorker(workerUpdatedData);
           }
-          return this.getWorkersList(this.selectedCompany!)
-        })
+        }),
+        switchMap(() => this.getWorkersList(this.selectedCompany!))
       )
-      .subscribe();
+
   }
 
 

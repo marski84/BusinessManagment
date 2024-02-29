@@ -4,12 +4,13 @@
   <mat-sidenav-container autosize class="sidenav-container">
   <mat-sidenav [opened]="true" mode="side" class="sidenav">
     <app-company-list
-      (selectedCompanyEmitted)="handleCompanySelected($event)"
+      (getCompanyWorkersEmitted)="handleGetSelectedCompanyWorkers($event)"
     ></app-company-list>
   </mat-sidenav>
   <mat-sidenav-content>
     <app-worker-list
       *ngIf="panelService.workersList() as workerData"
+      [companySelected]="companySelected"
       [workersData]="workerData"
       (editedWorkerDataEmitted)="handleWorkerEditedData($event)"
       (workerNotificationEmitted)="handleWorkerNotification($event)"

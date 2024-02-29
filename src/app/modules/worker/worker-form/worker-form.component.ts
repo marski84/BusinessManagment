@@ -9,7 +9,7 @@ import {WorkerData} from "../../../Shared/WorkerData.interface";
 import {DialogRef} from "@angular/cdk/dialog";
 import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material/dialog";
 import {HttpClient} from "@angular/common/http";
-import {WorkerFormService} from "./worker-form.service";
+import {UniversitiesService} from "./universities.service";
 import {toSignal} from "@angular/core/rxjs-interop";
 
 export interface WorkerFormInterface {
@@ -29,14 +29,11 @@ export interface WorkerDialogInterface {
   templateUrl: './worker-form.component.html',
   styleUrl: './worker-form.component.css'
 })
-export class WorkerFormComponent implements OnInit{
+export class WorkerFormComponent implements OnInit {// można rozbić na 2 komponenty POPUP i FORM
   private readonly fb = inject(NonNullableFormBuilder);
   private readonly dialogRef = inject(MatDialogRef<WorkerFormComponent>);
-  private readonly formService = inject(WorkerFormService);
-  universitiesObs$ = toSignal(this.formService.getUniversities());
-
-
-
+  private readonly universitiesService = inject(UniversitiesService);
+  universitiesObs$ = toSignal(this.universitiesService.getUniversities());
   workerForm: FormGroup<WorkerFormInterface> = this.fb.group({
     firstName: this.fb.control('', Validators.required),
     lastName: this.fb.control('', Validators.required),
@@ -49,6 +46,7 @@ export class WorkerFormComponent implements OnInit{
   ngOnInit(): void {
     console.log(this.data)
     if (this.data.formData) {
+      // można zrobić this.workerFOrm.patchValue()
       this.workerForm.controls.firstName.setValue(this.data.formData.name)
       this.workerForm.controls.lastName.setValue(this.data.formData.surname)
       if (this.data.formData.companyName) {
@@ -78,9 +76,6 @@ export class WorkerFormComponent implements OnInit{
     //   "companyId": "{{company}}",
     //   "university": "Uniwersytet Jagielloński"
     // }
-    if (!this.data.formData) {
-
-    }
     const result: WorkerData = {
       _id: this.data.formData._id,
       companyId: this.data.formData.companyId,
