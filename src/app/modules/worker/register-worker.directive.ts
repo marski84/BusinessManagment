@@ -26,7 +26,7 @@ export class RegisterWorkerDirective {
 
     const newWorkerData: WorkerData = {
       _id: "",
-      companyId: this.panelService.selectedCompanyId!,
+      companyId: this.panelService.currentCompany._id!,
       companyName: "",
       name: "",
       surname: "",

@@ -18,13 +18,10 @@ export class PanelService {
   private readonly baseApiUrl = environment.apiBaseUrl;
   private readonly companyListUrl = `${this.baseApiUrl}/companies`;
   private readonly workerApiBaseUrl = `${this.baseApiUrl}/workers`;
-  private selectedCompany: CompanyDataInterface | null = null;
+  private selectedCompany!: CompanyDataInterface;
 
-  get selectedCompanyId() {
-    if (!this.selectedCompany) {
-      return
-    }
-    return this.selectedCompany?._id
+  get currentCompany() {
+    return this.selectedCompany
   }
 
   workersList = signal<WorkerData[]>([]);
@@ -89,6 +86,7 @@ export class PanelService {
   }
 
   updateWorkerData(workerUpdatedData: WorkerData) {
+    console.log(workerUpdatedData)
     return this.http
       .put<
         {

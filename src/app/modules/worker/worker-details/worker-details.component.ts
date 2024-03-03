@@ -5,13 +5,14 @@ import {
   EventEmitter,
   inject,
   Input,
-  Output,
+  Output, ViewChild,
 } from '@angular/core';
 import { WorkerData } from '../../../Shared/WorkerData.interface';
 import { WorkerFormComponent } from '../worker-form/worker-form.component';
 import { MatDialog } from '@angular/material/dialog';
 import { filter, tap } from 'rxjs';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import {PopupComponent} from "../../shared-standalone/./popup/popup.component";
 
 @Component({
   selector: 'app-worker-details',
@@ -31,8 +32,11 @@ export class WorkerDetailsComponent {
   @Output()
   workerNotificationEmitted: EventEmitter<WorkerData> = new EventEmitter();
 
+  @ViewChild('formContainer', {static: false}) formContainer!: PopupComponent;
   handleEditWorkerData() {
-    const dialogRef = this.dialog.open(WorkerFormComponent, {
+    // this.formContainer.handleOpenForm()
+
+    const dialogRef = this.dialog.open(PopupComponent, {
       disableClose: true,
       hasBackdrop: true,
       data: {

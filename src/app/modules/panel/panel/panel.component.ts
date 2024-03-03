@@ -1,6 +1,6 @@
 import {Component, inject, OnInit} from '@angular/core';
 import {ActivatedRoute, Data} from "@angular/router";
-import {filter, finalize, Observable, Subscription, tap} from "rxjs";
+import {filter, finalize, Observable, Subscription, switchMap, tap} from "rxjs";
 import {UserDataInterface} from "../../../Shared/UserData.interface";
 import {takeUntilDestroyed, toSignal} from '@angular/core/rxjs-interop';
 import {CompanyDataInterface} from "../../../Shared/Company.interface";
@@ -8,6 +8,7 @@ import {PanelService} from "../panel.service";
 import {WorkerData} from "../../../Shared/WorkerData.interface";
 import {MatDialog} from "@angular/material/dialog";
 import {WorkerFormComponent} from "../../worker/worker-form/worker-form.component";
+import {PopupComponent} from "../../shared-standalone/popup/popup.component";
 
 
 @Component({
@@ -16,7 +17,7 @@ import {WorkerFormComponent} from "../../worker/worker-form/worker-form.componen
   styleUrl: './panel.component.css'
 })
 export class PanelComponent implements OnInit {
-  activatedRoute = inject(ActivatedRoute)
+  activatedRoute = inject(ActivatedRoute);
   userData: Observable<Data> = this.activatedRoute.data;
   panelService = inject(PanelService);
   data = toSignal(this.userData);
@@ -36,7 +37,8 @@ export class PanelComponent implements OnInit {
     }
     this.panelService.getWorkersList(companyData)
       .pipe(
-        tap(() => this.companySelected = true)
+        tap(() => this.companySelected = true),
+        // tap(() => this.selectedCompanyId = companyData._id)
   )
       .subscribe();
   }
@@ -62,7 +64,7 @@ export class PanelComponent implements OnInit {
   }
 
   private handleWorkerDataSupplement(workerData: WorkerData) {
-    const dialogRef = this.dialog.open(WorkerFormComponent, {
+    const dialogRef = this.dialog.open(PopupComponent, {
       disableClose: true,
       hasBackdrop: true,
       data : {
@@ -75,8 +77,10 @@ export class PanelComponent implements OnInit {
       .pipe(
         // filter((res) => Boolean(res)),
         filter(Boolean),
-        tap(editedWorkerData => this.panelService.updateWorkerData(editedWorkerData)),
-        finalize(() => this.panelService.notifyWorker(workerData))
+        tap(editedWorkerData => this.panelService.updateWorkerData(editedWorkerData).subscribe()),
+        tap(() => console.log('update')),
+        switchMap(workerData => this.panelService.getWorkersList(this.panelService.currentCompany),
+      )
       )
       .subscribe()
   }

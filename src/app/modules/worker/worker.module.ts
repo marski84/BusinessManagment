@@ -9,13 +9,13 @@ import {ReactiveFormsModule} from "@angular/forms";
 import {SpinnerModule} from "../spinner/spinner.module";
 import {RegisterWorkerDirective} from "./register-worker.directive";
 import {DeleteWorkerDirective} from "./delete-worker.directive";
+import {PopupComponent} from "../shared-standalone/./popup/popup.component";
 
 
 
 @NgModule({
   declarations: [
     WorkerListComponent,
-    WorkerFormComponent,
     WorkerDetailsComponent,
     RegisterWorkerDirective,
     DeleteWorkerDirective
@@ -26,10 +26,11 @@ import {DeleteWorkerDirective} from "./delete-worker.directive";
     MaterialModule,
     ReactiveFormsModule,
     SpinnerModule,
-
+    WorkerFormComponent,
+    PopupComponent
   ],
   exports: [
-    WorkerListComponent
+    WorkerListComponent,
   ]
 })
 export class WorkerModule { }
